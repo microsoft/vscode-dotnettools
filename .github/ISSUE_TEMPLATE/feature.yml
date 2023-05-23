@@ -1,0 +1,27 @@
+name: 💡 Feature Request
+description: Suggest a feature
+title: "[SUGGESTION] <title>"
+labels: [enhancement]
+body:
+- type: textarea
+  attributes:
+    label: Describe the feature you'd like
+    description: A clear concise description of what you'd like to see
+  validations:
+    required: false
+- type: textarea
+  attributes:
+    label: Alternatives considered
+    description: What alternatives have you considered
+  validations:
+    required: false
+- type: textarea
+  attributes:
+    label: Environment Information
+    description: Information about your environment
+    placeholder: |
+      - OS: [e.g. Windows, macOS, Linux]
+      - VS Code Version [e.g. 1.25.1]
+      - Extension Version (found in the settings of the extension) [e.g. 1.0.0] 
+  validations:
+    required: false
