@@ -1,6 +1,6 @@
-# Project
+# C# Dev Kit for Visual Studio Code
 
-Repo for C# productivity improvements for VS Code
+This repository is where we (Microsoft) gather and interact with the community around the [C# Dev Kit extension](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit) for Visual Studio Code. To report an issue here, ideally you would use the 'Report an Issue' capability within VS Code which will log an issue in this repository for us to triage and keep updated.
 
 ## Contributing
 
