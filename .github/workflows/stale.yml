@@ -19,33 +19,39 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         LABEL_OWNER_MAPPING: |
-          area-debugging: wardengnaw
-          area-extensionmanagement: aarnott
-          area-identity: AndreyTretyak
-          area-nuget: kartheekp-ms
-          area-project: tmeschter
-          area-project-cps: michael-eng
-          area-razor: phil-allen-msft          
-          area-restore: kartheekp-ms
-          area-sdk: nagilson
-          area-telemetry: jonathanjyi
-          area-templates: smitpatel
-          area-maui: AllenD-MSFT
-          area-unity: jbevain
-          area-roslyn: arkalyanms
+          area-debugging: @wardengnaw
+          area-extensionmanagement: @aarnott
+          area-identity: @AndreyTretyak
+          area-nuget: @kartheekp-ms
+          area-project: @tmeschter
+          area-project-cps: @michael-eng
+          area-razor: @phil-allen-msft
+          area-restore: @kartheekp-ms
+          area-sdk: @nagilson
+          area-telemetry: @jonathanjyi
+          area-templates: @smitpatel
+          area-maui: @AllenD-MSFT
+          area-unity: @jbevain
+          area-roslyn: @arkalyanms
       run: |
         LABEL_OWNER_MAPPING=$(echo "$LABEL_OWNER_MAPPING" | jq -R 'split("\n")[:-1] | map(split(": ")) | map({(.[0]): .[1]}) | add')
         STALE_DATE=$(date -d '14 days ago' +%Y-%m-%d)
-        ISSUES=$(gh issue list --state open --search "updated:<$STALE_DATE" --json number,labels --jq '.[] | select(.labels | length > 0)')
+        ISSUES=$(gh issue list --state open --search "updated:<$STALE_DATE" --json number,labels,assignees --jq '.[] | select(.labels | length > 0)')
         
         for issue in $(echo "${ISSUES}" | jq -r '.number'); do
-          LABELS=$(echo "${ISSUES}" | jq -r ". | select(.number == ${issue}) | .labels[].name")
-          for label in $LABELS; do
-            OWNER=$(echo $LABEL_OWNER_MAPPING | jq -r ".[\"$label\"]")
-            if [ ! -z "$OWNER" ]; then
-              COMMENT="This issue has been marked as stale for 14 days. @$OWNER, could you please take a look?"
-              gh issue comment $issue --body "$COMMENT"
-              break # This stops the loop after the first owner is found and tagged
-            fi
-          done
+          ASSIGNEES=$(echo "${ISSUES}" | jq -r ". | select(.number == ${issue}) | .assignees[].login" | head -n 1)
+          if [ ! -z "$ASSIGNEES" ]; then
+            COMMENT="This issue has been marked as stale for 14 days. @$ASSIGNEES, could you please take a look?"
+            gh issue comment $issue --body "$COMMENT"
+          else
+            LABELS=$(echo "${ISSUES}" | jq -r ". | select(.number == ${issue}) | .labels[].name")
+            for label in $LABELS; do
+              OWNERS=$(echo $LABEL_OWNER_MAPPING | jq -r ".[\"$label\"]")
+              if [ ! -z "$OWNERS" ]; then
+                COMMENT="This issue has been marked as stale for 14 days. $OWNERS, could you please take a look?"
+                gh issue comment $issue --body "$COMMENT"
+                break # This stops the loop after the first matched label and its owners are found and tagged
+              fi
+            done
+          fi
         done
