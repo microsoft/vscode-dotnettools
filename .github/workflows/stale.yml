@@ -38,7 +38,8 @@ jobs:
       run: |
         LABEL_OWNER_MAPPING=$(echo "${LABEL_OWNER_MAPPING_JSON}")
         STALE_DATE=$(date -d '14 days ago' +%Y-%m-%d)
-        ISSUES=$(gh issue list --state open --json number,labels,assignees --jq '.[] | select(.labels | length > 0)')
+        QUERY="repo:microsoft/vscode-dotnettools+is:open+is:issue+updated:<${STALE_DATE}+-label:enhancement+-label:needs-more-info"
+        ISSUES=$(gh api search/issues?q="${QUERY}" --paginate --jq '.items[] | {number: .number, labels: [.labels[].name], assignees: [.assignees[].login]}')        
         
         # Process each issue
         echo "${ISSUES}" | jq -c '.' | while read -r issue; do
