@@ -3,6 +3,7 @@ name: Comment on stale issues
 on:
   schedule:
   - cron: '0 0 * * *' # This will run daily at midnight
+  workflow_dispatch:
 
 jobs:
   comment-stale-issues:
