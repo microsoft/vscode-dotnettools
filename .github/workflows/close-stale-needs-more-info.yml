@@ -45,7 +45,7 @@ jobs:
 
               // Look for the event where the label was added and capture the date
               for (const event of events) {
-                if (event.event === 'labeled' and event.label.name === labelName) {
+                if (event.event === 'labeled' && event.label.name === labelName) {
                   labelAddedDate = new Date(event.created_at);
                   break;
                 }
