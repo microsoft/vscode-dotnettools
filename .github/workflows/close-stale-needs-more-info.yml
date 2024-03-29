@@ -23,13 +23,14 @@ jobs:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
             const labelName = 'needs-more-info';
+            const excludedLabel = 'enhancement';
             const staleDays = 14;
-            const closingComment = "This issue has been automatically closed due to inactivity from original bug filer and having the 'needs-more-info' label for more than 14 days. If the issue still persists, please reopen the issue with the requested information.";
+            const closingComment = "This issue has been automatically closed due to inactivity and having the 'needs-more-info' label for more than 14 days. If the issue still persists, please reopen the issue with the requested information.";
             const currentDate = new Date();
             const issues = await github.paginate(github.rest.issues.listForRepo, {
               owner: context.repo.owner,
               repo: context.repo.repo,
-              labels: labelName,
+              labels: labelName + ', -' + excludedLabel, // Excludes issues with 'enhancement' label
               state: 'open',
             });
 
@@ -37,7 +38,7 @@ jobs:
               let labelAddedDate = null;
 
               // Fetch events to find when the label was added
-              const events = await github.paginate(github.rest.issues.listEvents, {
+              const events = await github.paginate(github.rest.issues.listEventsForRepo, {
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: issue.number,
@@ -52,10 +53,14 @@ jobs:
               }
 
               if (labelAddedDate) {
+                const issueUpdatedDate = new Date(issue.updated_at);
+                const labelAddedTime = labelAddedDate.getTime();
+                const issueUpdatedTime = issueUpdatedDate.getTime();
                 const diffTime = Math.abs(currentDate - labelAddedDate);
                 const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-                if (diffDays > staleDays) {
+                // Check if the issue was updated after the label was added and if it has been more than 'staleDays' since the label was added
+                if (issueUpdatedTime > labelAddedTime && diffDays > staleDays) {
                   // Post a closing comment before closing the issue
                   await github.rest.issues.createComment({
                     owner: context.repo.owner,
@@ -72,7 +77,7 @@ jobs:
                     state: 'closed',
                   });
 
-                  console.log(`Issue #${issue.number} has been closed with a comment as it has had the '${labelName}' label for more than ${staleDays} days.`);
+                  console.log(`Issue #${issue.number} has been closed with a comment as it has had the '${labelName}' label for more than ${staleDays} days and was updated since the label was applied.`);
                 }
               }
             }
