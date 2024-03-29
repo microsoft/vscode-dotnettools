@@ -1,4 +1,4 @@
-name: 'Remove Needs More Info Label on Response'
+name: 'Manual Cleanup: Remove Needs More Info'
 
 on:
   workflow_dispatch:
@@ -20,7 +20,7 @@ jobs:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
             const labelName = 'needs-more-info';
-            const commentBody = "Thank you for providing the additional information. The `needs-more-info` label has been removed.";
+            const commentBody = "The `needs-more-info` label has been removed since the original bug filer has responded since the label was originally set.";
             const issues = await github.paginate(github.rest.issues.listForRepo, {
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -60,7 +60,23 @@ jobs:
                 });
 
                 if (hasResponseAfterLabel) {
-                  console.log(`Remove "${labelName}" label from issue #${issue.number} and add a comment.`);
+                  // Remove the label
+                  await github.rest.issues.removeLabel({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: issue.number,
+                    name: labelName,
+                  });
+
+                  // Add a comment
+                  await github.rest.issues.createComment({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: issue.number,
+                    body: commentBody,
+                  });
+
+                  console.log(`Removed "${labelName}" label from issue #${issue.number} and added a comment.`);
                 }
               }
             }
