@@ -39,18 +39,18 @@ jobs:
         LABEL_OWNER_MAPPING=$(echo "${LABEL_OWNER_MAPPING_JSON}")
         STALE_DATE=$(date -d '14 days ago' +%Y-%m-%d)
         QUERY="repo:microsoft/vscode-dotnettools+is:open+is:issue+updated:<${STALE_DATE}+-label:enhancement+-label:needs-more-info"
-        ISSUES=$(gh api search/issues?q="${QUERY}" --paginate --jq '.items[] | {number: .number, labels: [.labels[].name], assignees: [.assignees[].login]}')        
+        ISSUES=$(gh api search/issues?q="${QUERY}" --paginate --jq '.items[] | {number: .number, labels: [.labels[].name], assignees: [.assignees[].login // ""]} | select(.assignees != null)')        
         
         # Process each issue
         echo "${ISSUES}" | jq -c '.' | while read -r issue; do
           issue_number=$(echo "$issue" | jq '.number')
-          ASSIGNEES=$(echo "$issue" | jq -r '.assignees[].login')
+          ASSIGNEES=$(echo "$issue" | jq -r '.assignees')
           
           # Initialize TAGGED_OWNERS
           TAGGED_OWNERS=""
           
           # Check if there are any assignees
-          if [[ ! -z "$ASSIGNEES" ]]; then
+          if [[ "$ASSIGNEES" != "" ]]; then
             for assignee in $ASSIGNEES; do
               TAGGED_OWNERS="$TAGGED_OWNERS @$assignee"
             done
