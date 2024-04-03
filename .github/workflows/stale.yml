@@ -50,7 +50,7 @@ jobs:
           TAGGED_OWNERS=""
           
           # Check if there are any assignees
-          if [[ "$ASSIGNEES" != "" ]]; then
+          if [[ "$ASSIGNEES" != "[]" ]]; then
             for assignee in $ASSIGNEES; do
               TAGGED_OWNERS="$TAGGED_OWNERS @$assignee"
             done
@@ -61,7 +61,7 @@ jobs:
               OWNER=$(echo $LABEL_OWNER_MAPPING | jq -r ".[\"$label\"] // empty")
               if [ ! -z "$OWNER" ]; then
                 # Add the found owner to the list of owners to be tagged
-                TAGGED_OWNERS="$TAGGED_OWNERS $OWNER"
+                TAGGED_OWNERS="$TAGGED_OWNERS @$OWNER"
               fi
             done
             if [ -z "$TAGGED_OWNERS" ]; then
@@ -75,7 +75,9 @@ jobs:
           
           # Comment on the issue and tag the collected owners
           COMMENT="This issue has been marked as stale after 14 days of inactivity. $TAGGED_OWNERS, could you please take a look?"
+          COMMENT=$(echo $COMMENT | sed 's/ @/@/g') # Remove extra space before '@'
           gh issue comment $issue_number --body "$COMMENT"
         done
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
