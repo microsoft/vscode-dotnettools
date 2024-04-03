@@ -77,6 +77,9 @@ jobs:
           COMMENT="This issue has been marked as stale after 14 days of inactivity. $TAGGED_OWNERS, could you please take a look?"
           COMMENT=$(echo $COMMENT | sed 's/ @/@/g') # Remove extra space before '@'
           gh issue comment $issue_number --body "$COMMENT"
+          
+          # Add a delay to stay within API rate limits
+          sleep 1
         done
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
