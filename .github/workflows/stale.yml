@@ -14,7 +14,7 @@ jobs:
     env:
       LABEL_OWNER_MAPPING_JSON: >
         {
-          "area-debugging": "@wardengnaw",
+          "area-.NET-debugging": "@wardengnaw",
           "area-extensionmanagement": "@aarnott",
           "area-identity": "@andreytretyak",
           "area-nuget": "@kartheekp-ms",
