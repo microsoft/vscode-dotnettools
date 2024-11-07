@@ -70,7 +70,23 @@ jobs:
 
                 // Check if the issue was not updated after the label was added and if it has been more than 'staleDays' since the label was added
                 if (issueUpdatedTime <= labelAddedTime && diffDays > staleDays) {
-                  console.log(`Issue #${issue.number} can be closed`);
+                  // Post a closing comment before closing the issue
+                  await github.rest.issues.createComment({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: issue.number,
+                    body: closingComment,
+                  });
+
+                  // Close the issue
+                  await github.rest.issues.update({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    issue_number: issue.number,
+                    state: 'closed',
+                  });
+
+                  console.log(`Issue #${issue.number} has been closed with a comment as it has had the '${labelName}' label for more than ${staleDays} days and was not updated since the label was applied.`);
                 }
               }
             }
