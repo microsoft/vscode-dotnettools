@@ -110,13 +110,17 @@ jobs:
 
             if (all_users.length === 0) {
               console.log("No participants to mention after filtering");
-              return { mentions: "" };
+              const fs = require('fs');
+              fs.appendFileSync(process.env.GITHUB_ENV, 'MENTIONS=\n');
+              return;
             }
 
             const mentions = all_users.map(u => `@${u}`).join(' ');
             console.log(`Generated mentions: ${mentions}`);
-            console.log(`Setting output 'mentions' to: "${mentions}"`);
+            console.log(`Setting environment variable 'MENTIONS' to: "${mentions}"`);
 
+            const fs = require('fs');
+            fs.appendFileSync(process.env.GITHUB_ENV, `MENTIONS=${mentions}\n`);
             return { mentions: mentions };
           result-encoding: string
 
@@ -125,12 +129,10 @@ jobs:
         with:
           script: |
             console.log("=== STEP 2: ADD COMMENT ===");
-            console.log("Raw step output access test:");
-            console.log("steps.participants:", JSON.stringify('${{steps.participants}}', null, 2));
-            console.log("steps.participants.outputs:", JSON.stringify('${{steps.participants.outputs}}', null, 2));
-            console.log("steps.participants.outputs.mentions:", '${{steps.participants.outputs.mentions}}');
+            console.log("Environment variable access:");
+            console.log("process.env.MENTIONS:", process.env.MENTIONS);
             
-            const mentions = '${{steps.participants.outputs.mentions}}';
+            const mentions = process.env.MENTIONS || '';
             const labelName = context.payload.label.name;
             
             console.log(`Processing label: ${labelName}`);
