@@ -110,13 +110,15 @@ jobs:
 
             if (all_users.length === 0) {
               console.log("No participants to mention after filtering");
-              return { mentions: "" };
+              core.setOutput('mentions', '');
+              return;
             }
 
             const mentions = all_users.map(u => `@${u}`).join(' ');
             console.log(`Generated mentions: ${mentions}`);
             console.log(`Setting output 'mentions' to: "${mentions}"`);
 
+            core.setOutput('mentions', mentions);
             return { mentions: mentions };
           result-encoding: string
 
