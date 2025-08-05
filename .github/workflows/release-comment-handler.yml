@@ -1,4 +1,4 @@
-name: Label Comment Handler
+name: Release Comment Handler
 
 on:
   issues:
@@ -18,6 +18,7 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
+            console.log("=== WORKFLOW START ===");
             const issue_number = context.payload.issue.number;
             const repo = context.repo;
 
@@ -36,16 +37,21 @@ jobs:
             console.log(`Added author to participants: ${author.toLowerCase()}`);
 
             // Get all comments and add commenters
+            console.log("=== FETCHING COMMENTS ===");
             const comments = await github.paginate(
               github.rest.issues.listComments,
               { ...repo, issue_number }
             );
             console.log(`Found ${comments.length} comments`);
             
-            comments.forEach(c => {
+            if (comments.length === 0) {
+              console.log("❌ NO COMMENTS FOUND - This might be why no users are tagged");
+            }
+            
+            comments.forEach((c, index) => {
               const commenter = c.user.login.toLowerCase();
               all_participants.add(commenter);
-              console.log(`Added commenter: ${commenter}`);
+              console.log(`Comment #${index + 1}: Added commenter: ${commenter} (original: ${c.user.login})`);
             });
 
             // Get all reactions from comments
@@ -82,9 +88,16 @@ jobs:
 
             // Filter out bot users
             const isBotUser = (username) => {
-              return username.endsWith('[bot]') || 
-                username.includes('bot') || 
-                ['dependabot', 'renovate', 'greenkeeper', 'codecov', 'coveralls'].includes(username.toLowerCase());
+              const lowerUsername = username.toLowerCase();
+              return lowerUsername.endsWith('[bot]') || 
+                lowerUsername === 'dependabot' || 
+                lowerUsername === 'renovate' || 
+                lowerUsername === 'greenkeeper' || 
+                lowerUsername === 'codecov' || 
+                lowerUsername === 'coveralls' ||
+                lowerUsername.startsWith('dependabot[') ||
+                lowerUsername.includes('-bot') ||
+                lowerUsername.includes('_bot');
             };
 
             // Convert Set to array and filter out bots
@@ -102,14 +115,21 @@ jobs:
 
             const mentions = all_users.map(u => `@${u}`).join(' ');
             console.log(`Generated mentions: ${mentions}`);
+            console.log(`Setting output 'mentions' to: "${mentions}"`);
 
-            return { mentions };
+            return { mentions: mentions };
           result-encoding: string
 
       - name: Add label comment
         uses: actions/github-script@v7
         with:
           script: |
+            console.log("=== STEP 2: ADD COMMENT ===");
+            console.log("Raw step output access test:");
+            console.log("steps.participants:", JSON.stringify('${{steps.participants}}', null, 2));
+            console.log("steps.participants.outputs:", JSON.stringify('${{steps.participants.outputs}}', null, 2));
+            console.log("steps.participants.outputs.mentions:", '${{steps.participants.outputs.mentions}}');
+            
             const mentions = '${{steps.participants.outputs.mentions}}';
             const labelName = context.payload.label.name;
             
