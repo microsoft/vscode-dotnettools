@@ -70,7 +70,9 @@ jobs:
         with:
           script: |
             const mentions = '${{steps.participants.outputs.mentions}}';
-            const message = `${mentions}\n\nThis issue has been fixed! Please update to the latest versions of VS Code, C# Dev Kit, and the C# extension.`;
+            const message = mentions
+              ? `${mentions}\n\nThis issue has been fixed! Please update to the latest versions of VS Code, C# Dev Kit, and the C# extension.`
+              : `This issue has been fixed! Please update to the latest versions of VS Code, C# Dev Kit, and the C# extension.`;
 
             await github.rest.issues.createComment({
               ...context.repo,
