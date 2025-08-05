@@ -6,22 +6,7 @@ on:
       - labeled
 
 jobs:
-  comment            // Convert Set to array and filter out bots
-            const all_users_before_filter = Array.from(all_participants);
-            console.log(`All participants before bot filtering: ${all_users_before_filter.join(', ')}`);
-            
-            const all_users = all_users_before_filter.filter(user => !isBotUser(user));
-            
-            const filteredBots = all_users_before_filter.filter(user => isBotUser(user));
-            console.log(`Filtered out ${filteredBots.length} bot users: ${filteredBots.join(', ')}`);
-            console.log(`Final participants count: ${all_users.length}`);
-            console.log(`Final participants: ${all_users.join(', ')}`);
-            
-            // Debug each user's bot status
-            all_users_before_filter.forEach(user => {
-              const isBot = isBotUser(user);
-              console.log(`User "${user}" - isBot: ${isBot}`);
-            });el:
+  comment_on_label:
     if: github.event.label.name == 'prerelease' || github.event.label.name == 'fixed'
     runs-on: ubuntu-latest
     permissions:
