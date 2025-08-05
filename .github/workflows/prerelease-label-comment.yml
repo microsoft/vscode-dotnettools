@@ -53,8 +53,15 @@ jobs:
             all_reactors.delete(author);
             commenters.forEach(u => all_reactors.delete(u));
 
-            // Combine all usernames
-            const all_users = [author, ...commenters, ...all_reactors];
+            // Filter out bot users
+            const isBotUser = (username) => {
+              return username.endsWith('[bot]') || 
+                username.includes('bot') || 
+                ['dependabot', 'renovate', 'greenkeeper', 'codecov', 'coveralls'].includes(username.toLowerCase());
+            };
+
+            // Combine all usernames:
+            const all_users = [author, ...commenters, ...all_reactors].filter(user => !isBotUser(user));
 
             if (all_users.length === 0) {
               return { mentions: "" };
