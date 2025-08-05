@@ -70,6 +70,11 @@ jobs:
         with:
           script: |
             const mentions = '${{steps.participants.outputs.mentions}}';
+
+            if (mentions.trim() === "") {
+              console.log("No participants to mention. Skipping comment creation.");
+              return;
+            }
             const message = `${mentions}\n\nA fix for this issue is now available in the next pre-releases of C#DK/C#. If you'd like to try out the fix, please see [these instructions](https://github.com/microsoft/vscode-dotnettools/wiki/Installing-and-updating-pre%E2%80%90release-versions-of-C%23-Dev-Kit-and-C%23-Extension) to update or try pre-release versions.`;
 
             await github.rest.issues.createComment({
