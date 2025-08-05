@@ -119,8 +119,6 @@ jobs:
             console.log(`Setting output 'mentions' to: "${mentions}"`);
 
             core.setOutput('mentions', mentions);
-            return { mentions: mentions };
-          result-encoding: string
 
       - name: Add label comment
         uses: actions/github-script@v7
