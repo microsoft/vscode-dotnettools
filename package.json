@@ -1,0 +1,46 @@
+{
+  "name": "vscode-dotnettools",
+  "displayName": "C# Dev Kit",
+  "description": "Official C# extension from Microsoft with enhanced file organization",
+  "version": "1.0.0",
+  "publisher": "ms-dotnettools",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Other"
+  ],
+  "keywords": [
+    "C#",
+    "csharp",
+    "dotnet",
+    "file-nesting"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {},
+  "configurationDefaults": {
+    "explorer.fileNesting.patterns": {
+      "*.cs": "${capture}.designer.cs,${capture}.g.cs,${capture}.generated.cs",
+      "*.csproj": "${capture}.csproj.user",
+      "*.json": "${capture}.Development.json",
+      "*.cshtml": "${capture}.cshtml.cs,${capture}.cshtml.css",
+      "*.razor": "${capture}.razor.cs,${capture}.razor.css",
+      "*.xaml": "${capture}.xaml.cs"
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "test": "echo 'No tests configured'"
+  },
+  "devDependencies": {
+    "@types/node": "^24.2.0",
+    "@types/vscode": "^1.102.0",
+    "typescript": "^5.9.2"
+  },
+  "author": "Microsoft",
+  "license": "MIT"
+}
