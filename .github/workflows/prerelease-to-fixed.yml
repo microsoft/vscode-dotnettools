@@ -11,9 +11,6 @@ permissions:
 jobs:
   update-labels:
     runs-on: ubuntu-latest
-    permissions:
-      issues: write
-      contents: read
     steps:
       - name: Checkout
         uses: actions/checkout@v4
