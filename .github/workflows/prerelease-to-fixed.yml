@@ -1,0 +1,34 @@
+
+name: Update Prerelease Label to Fixed Label
+
+on:
+  workflow_dispatch: # Manual trigger from Actions tab
+
+jobs:
+  update-labels:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up GitHub CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gh
+          gh auth setup-git
+        env:
+          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+      - name: Remove "prerelease" and add "fixed"
+        env:
+          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: |
+          echo "Finding issues with label 'prerelease'..."
+          issues=$(gh issue list --label "prerelease" --state open --json number --jq '.[].number')
+          if [ -z "$issues" ]; then
+            echo "No issues found with label 'prerelease'."
+            exit 0
+          fi
+          for issue in $issues; do
+            echo "Updating issue #$issue"
+            gh issue edit "$issue" --remove-label "prerelease" --add-label "fixed"
