@@ -4,6 +4,10 @@ name: Update Prerelease Label to Fixed Label
 on:
   workflow_dispatch: # Manual trigger from Actions tab
 
+permissions:
+  issues: write
+  contents: read
+
 jobs:
   update-labels:
     runs-on: ubuntu-latest
