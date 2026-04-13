@@ -263,7 +263,7 @@
             <div class="tag tag-prerelease">Apr Pre-release 2</div>
           </div>
         </div>
-        <div class="cal-day today">
+        <div class="cal-day">
           <div class="day-number">9</div>
           <div class="band band-dev band-mid"></div>
         </div>
@@ -672,5 +672,24 @@
     </div>
   </div>
 
+<script>
+(function() {
+  const now = new Date();
+  const y = now.getFullYear(), m = now.getMonth(), d = now.getDate();
+  document.querySelectorAll('.month-section').forEach(section => {
+    const heading = section.querySelector('.month-heading').textContent.trim();
+    const [monthName, yearStr] = heading.split(' ');
+    const monthIdx = new Date(monthName + ' 1, 2000').getMonth();
+    const sectionYear = parseInt(yearStr);
+    if (sectionYear !== y || monthIdx !== m) return;
+    section.querySelectorAll('.cal-day:not(.outside)').forEach(cell => {
+      const num = cell.querySelector('.day-number');
+      if (num && parseInt(num.textContent) === d) {
+        cell.classList.add('today');
+      }
+    });
+  });
+})();
+</script>
 </body>
 </html>
