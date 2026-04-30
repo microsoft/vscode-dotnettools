@@ -34,7 +34,24 @@ jobs:
               return;
             }
 
+            const labelToRemove = labelToAdd === 'fixed' ? 'not-fixed' : 'fixed';
             const issueNumber = context.payload.issue.number;
+
+            // Remove the opposing label if present
+            const { data: currentLabels } = await github.rest.issues.listLabelsOnIssue({
+              ...context.repo,
+              issue_number: issueNumber,
+            });
+
+            if (currentLabels.some(l => l.name === labelToRemove)) {
+              await github.rest.issues.removeLabel({
+                ...context.repo,
+                issue_number: issueNumber,
+                name: labelToRemove,
+              });
+              console.log(`Removed label "${labelToRemove}" from issue #${issueNumber}`);
+            }
+
             await github.rest.issues.addLabels({
               ...context.repo,
               issue_number: issueNumber,

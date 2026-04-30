@@ -1,7 +1,12 @@
+---
+name: calendar-view
+description: Generates an interactive, scrollable HTML calendar view from a markdown schedule file. The calendar uses the Canvas skill to display as a borderless app window. Any schedule with named categories (phases, milestones, events) and dates or date ranges can be visualized. 
+Examples include iteration plans, project timelines, release schedules, marketing calendars, sprint plans, academic term schedules.
+---
+
 # Skill: Calendar View
 
 Generate an interactive, scrollable HTML calendar view from a markdown schedule file. The calendar uses the Canvas skill to display as a borderless app window.
-
 Any schedule with named categories (phases, milestones, events) and dates or date ranges can be visualized. Examples: iteration plans, project timelines, release schedules, marketing calendars, sprint plans, academic term schedules.
 
 ---

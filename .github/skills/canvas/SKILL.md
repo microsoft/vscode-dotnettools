@@ -1,4 +1,8 @@
-# Skill 09: Canvas
+---
+name: canvas
+description: Show things visually using Canvas. Use when the human says "put this on the canvas," "show me a visual," "make a slide," or "visualize this." Canvas creates an HTML file and opens it as a borderless app window.
+---
+# Skill: Canvas
 
 Canvas is how BlueBridge shows things visually. When the human says "put this on the canvas," "show me a visual," "make a slide," or "visualize this," Canvas is the tool.
 
