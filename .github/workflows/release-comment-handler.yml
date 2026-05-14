@@ -7,7 +7,7 @@ on:
 
 jobs:
   comment_on_label:
-    if: github.event.label.name == 'prerelease' || github.event.label.name == 'fixed'
+    if: github.event.label.name == 'prerelease' || github.event.label.name == 'stable'
     runs-on: ubuntu-latest
     permissions:
       issues: write
@@ -148,14 +148,14 @@ jobs:
                 console.log("No participants to mention for prerelease. Skipping comment creation.");
                 return;
               }
-              message = `${mentions}\n\nA fix for this issue is now available in the next pre-releases of C#DK/C#. If you'd like to try out the fix, please see [these instructions](https://github.com/microsoft/vscode-dotnettools/wiki/Installing-and-updating-pre%E2%80%90release-versions-of-C%23-Dev-Kit-and-C%23-Extension) to update or try pre-release versions.`;
+              message = `${mentions}\n\nA fix for this issue is now available in the **latest pre-release versions** of C# Dev Kit and the C# extension.\n\nTo help us validate the fix, please see [these instructions](https://github.com/microsoft/vscode-dotnettools/wiki/Installing-and-updating-pre%E2%80%90release-versions-of-C%23-Dev-Kit-and-C%23-Extension) to update or try pre-release versions.\n\n**Issue resolved?** ✅\nComment "Status: Fixed"\n\n**Issue still occurring?** ❌\n1. Comment "Status: Not Fixed"\n1. Run ".NET: Collect C# Dev Kit Logs" command\n1. Zip and post contents to this issue\n1. Provide any other screenshots/recordings that may be helpful to continue debugging`;
               console.log("Generated prerelease message");
-            } else if (labelName === 'fixed') {
-              console.log("Processing fixed label");
+            } else if (labelName === 'stable') {
+              console.log("Processing stable label");
               message = mentions.trim() !== ""
-                ? `${mentions}\n\nThis issue has been fixed! Please update to the latest versions of VS Code, C# Dev Kit, and the C# extension.`
-                : `This issue has been fixed! Please update to the latest versions of VS Code, C# Dev Kit, and the C# extension.`;
-              console.log(`Generated fixed message ${mentions.trim() !== "" ? "with" : "without"} mentions`);
+                ? `${mentions}\n\nThis issue has been fixed! Please update to the latest stable versions of VS Code, C# Dev Kit, and the C# extension.`
+                : `This issue has been fixed! Please update to the latest stable versions of VS Code, C# Dev Kit, and the C# extension.`;
+              console.log(`Generated stable message ${mentions.trim() !== "" ? "with" : "without"} mentions`);
             }
 
             console.log(`Final message length: ${message.length}`);
