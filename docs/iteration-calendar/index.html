@@ -109,6 +109,7 @@
       font-weight: 600;
       z-index: 2;
       overflow: hidden;
+      white-space: nowrap;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
@@ -137,6 +138,12 @@
     .band-planning { background: #DBEAFE; color: #1E40AF; }
     .band-dev      { background: #D1FAE5; color: #065F46; }
     .band-endgame  { background: #FEE2E2; color: #991B1B; }
+    .band-dev-v1v2 {
+      z-index: 4;
+    }
+    .band-span-2 {
+      right: calc(-100% - 1px);
+    }
 
     .tags {
       margin-top: 32px;
@@ -156,7 +163,7 @@
       letter-spacing: 0.5px;
     }
     .tag-freeze      { background: #FEF3C7; color: #92400E; }
-    .tag-release     { background: #7C3AED; color: #F5F3FF; }
+    .tag-release     { background: #7C3AED; color: #F5F3FF; white-space: normal; }
     .tag-prerelease  { background: #F3E8FF; color: #6B21A8; }
 
     /* Sticky legend at bottom */
@@ -202,171 +209,6 @@
   <!-- Sticky top bar -->
   <div class="top-bar">
     <h1>C# in VS Code - Iteration Calendar</h1>
-  </div>
-
-  <!-- ==================== APRIL ITERATION ==================== -->
-  <div class="month-section" id="apr">
-    <div class="month-heading">April 2026</div>
-    <div class="cal">
-      <div class="cal-header">
-        <div class="cal-header-cell">Sun</div>
-        <div class="cal-header-cell">Mon</div>
-        <div class="cal-header-cell">Tue</div>
-        <div class="cal-header-cell">Wed</div>
-        <div class="cal-header-cell">Thu</div>
-        <div class="cal-header-cell">Fri</div>
-        <div class="cal-header-cell weekend">Sat</div>
-      </div>
-      <div class="cal-grid">
-        <!-- Week 1: Mar 29 - Apr 4 -->
-        <div class="cal-day outside weekend"><div class="day-number">29</div></div>
-        <div class="cal-day">
-          <div class="day-number">30</div>
-          <div class="band band-planning band-start">Planning</div>
-        </div>
-        <div class="cal-day">
-          <div class="day-number">31</div>
-          <div class="band band-planning band-mid"></div>
-        </div>
-        <div class="cal-day">
-          <div class="day-number">1</div>
-          <div class="band band-planning band-end"></div>
-          <div class="tags">
-            <div class="tag tag-release">Mar Stable Release</div>
-            <div class="tag tag-prerelease">Apr Pre-release 1</div>
-          </div>
-        </div>
-        <div class="cal-day">
-          <div class="day-number">2</div>
-          <div class="band band-dev band-start">Dev</div>
-        </div>
-        <div class="cal-day">
-          <div class="day-number">3</div>
-          <div class="band band-dev band-end"></div>
-        </div>
-        <div class="cal-day weekend"><div class="day-number">4</div></div>
-
-        <!-- Week 2: Apr 5 - 11 -->
-        <div class="cal-day weekend"><div class="day-number">5</div></div>
-        <div class="cal-day">
-          <div class="day-number">6</div>
-          <div class="band band-dev band-start">Dev</div>
-        </div>
-        <div class="cal-day">
-          <div class="day-number">7</div>
-          <div class="band band-dev band-mid"></div>
-        </div>
-        <div class="cal-day">
-          <div class="day-number">8</div>
-          <div class="band band-dev band-mid"></div>
-          <div class="tags">
-            <div class="tag tag-prerelease">Apr Pre-release 2</div>
-          </div>
-        </div>
-        <div class="cal-day">
-          <div class="day-number">9</div>
-          <div class="band band-dev band-mid"></div>
-        </div>
-        <div class="cal-day">
-          <div class="day-number">10</div>
-          <div class="band band-dev band-end"></div>
-        </div>
-        <div class="cal-day weekend"><div class="day-number">11</div></div>
-
-        <!-- Week 3: Apr 12 - 18 -->
-        <div class="cal-day weekend"><div class="day-number">12</div></div>
-        <div class="cal-day">
-          <div class="day-number">13</div>
-          <div class="band band-dev band-start">Dev</div>
-        </div>
-        <div class="cal-day">
-          <div class="day-number">14</div>
-          <div class="band band-dev band-mid"></div>
-        </div>
-        <div class="cal-day">
-          <div class="day-number">15</div>
-          <div class="band band-dev band-mid"></div>
-          <div class="tags">
-            <div class="tag tag-prerelease">Apr Pre-release 3</div>
-          </div>
-        </div>
-        <div class="cal-day">
-          <div class="day-number">16</div>
-          <div class="band band-dev band-mid"></div>
-        </div>
-        <div class="cal-day">
-          <div class="day-number">17</div>
-          <div class="band band-dev band-end"></div>
-        </div>
-        <div class="cal-day weekend"><div class="day-number">18</div></div>
-
-        <!-- Week 4: Apr 19 - 25 -->
-        <div class="cal-day weekend"><div class="day-number">19</div></div>
-        <div class="cal-day">
-          <div class="day-number">20</div>
-          <div class="band band-dev band-start">Dev</div>
-        </div>
-        <div class="cal-day">
-          <div class="day-number">21</div>
-          <div class="band band-dev band-end"></div>
-        </div>
-        <div class="cal-day">
-          <div class="day-number">22</div>
-          <div class="tags" style="margin-top:0">
-            <div class="tag tag-freeze">Code Freeze</div>
-            <div class="tag tag-prerelease">Apr Pre-release 4 (RC)</div>
-          </div>
-        </div>
-        <div class="cal-day">
-          <div class="day-number">23</div>
-          <div class="band band-endgame band-start">Endgame</div>
-        </div>
-        <div class="cal-day">
-          <div class="day-number">24</div>
-          <div class="band band-endgame band-end"></div>
-        </div>
-        <div class="cal-day weekend"><div class="day-number">25</div></div>
-
-        <!-- Week 5: Apr 26 - May 2 -->
-        <div class="cal-day weekend"><div class="day-number">26</div></div>
-        <div class="cal-day">
-          <div class="day-number">27</div>
-          <div class="band band-endgame band-start">Endgame</div>
-        </div>
-        <div class="cal-day">
-          <div class="day-number">28</div>
-          <div class="band band-endgame band-mid"></div>
-        </div>
-        <div class="cal-day">
-          <div class="day-number">29</div>
-          <div class="band band-endgame band-mid"></div>
-        </div>
-        <div class="cal-day">
-          <div class="day-number">30</div>
-          <div class="band band-endgame band-mid"></div>
-        </div>
-        <div class="cal-day outside">
-          <div class="day-number">1</div>
-          <div class="band band-endgame band-end"></div>
-        </div>
-        <div class="cal-day outside weekend"><div class="day-number">2</div></div>
-
-        <!-- Week 6: May 3 - 9 -->
-        <div class="cal-day outside weekend"><div class="day-number">3</div></div>
-        <div class="cal-day outside"><div class="day-number">4</div></div>
-        <div class="cal-day outside"><div class="day-number">5</div></div>
-        <div class="cal-day outside">
-          <div class="day-number">6</div>
-          <div class="tags" style="margin-top:0">
-            <div class="tag tag-release">Apr Stable Release</div>
-            <div class="tag tag-prerelease">May Pre-release 1</div>
-          </div>
-        </div>
-        <div class="cal-day outside"><div class="day-number">7</div></div>
-        <div class="cal-day outside"><div class="day-number">8</div></div>
-        <div class="cal-day outside weekend"><div class="day-number">9</div></div>
-      </div>
-    </div>
   </div>
 
   <!-- ==================== MAY ITERATION ==================== -->
@@ -452,16 +294,18 @@
           <div class="day-number">20</div>
           <div class="tags" style="margin-top:0">
             <div class="tag tag-freeze">Code Freeze</div>
-            <div class="tag tag-prerelease">May Pre-release 3 (RC)</div>
           </div>
         </div>
         <div class="cal-day">
           <div class="day-number">21</div>
-          <div class="band band-endgame band-start">Endgame</div>
+          <div class="band band-dev band-dev-v1v2 band-span-2 band-start">DEV - V1 &amp; V2</div>
+          <div class="tags">
+            <div class="tag tag-prerelease">May Pre-release 1</div>
+          </div>
         </div>
         <div class="cal-day">
           <div class="day-number">22</div>
-          <div class="band band-endgame band-end"></div>
+          <div class="band band-dev band-end"></div>
         </div>
         <div class="cal-day weekend"><div class="day-number">23</div></div>
 
@@ -469,23 +313,26 @@
         <div class="cal-day weekend"><div class="day-number">24</div></div>
         <div class="cal-day">
           <div class="day-number">25</div>
-          <div class="band band-endgame band-start">Endgame</div>
+          <div class="band band-dev band-dev-v1v2 band-span-2 band-start">DEV - V1 &amp; V2</div>
         </div>
         <div class="cal-day">
           <div class="day-number">26</div>
-          <div class="band band-endgame band-mid"></div>
+          <div class="band band-dev band-mid"></div>
         </div>
         <div class="cal-day">
           <div class="day-number">27</div>
-          <div class="band band-endgame band-mid"></div>
+          <div class="band band-dev band-mid"></div>
+          <div class="tags">
+            <div class="tag tag-prerelease">May Pre-release 2</div>
+          </div>
         </div>
         <div class="cal-day">
           <div class="day-number">28</div>
-          <div class="band band-endgame band-mid"></div>
+          <div class="band band-dev band-mid"></div>
         </div>
         <div class="cal-day">
           <div class="day-number">29</div>
-          <div class="band band-endgame band-end"></div>
+          <div class="band band-dev band-end"></div>
         </div>
         <div class="cal-day weekend"><div class="day-number">30</div></div>
 
@@ -496,8 +343,7 @@
         <div class="cal-day outside">
           <div class="day-number">3</div>
           <div class="tags" style="margin-top:0">
-            <div class="tag tag-release">May Stable Release</div>
-            <div class="tag tag-prerelease">Jun Pre-release 1</div>
+            <div class="tag tag-prerelease">May Pre-release 3</div>
           </div>
         </div>
         <div class="cal-day outside"><div class="day-number">4</div></div>
@@ -507,7 +353,7 @@
     </div>
   </div>
 
-  <!-- ==================== JUNE ITERATION ==================== -->
+  <!-- ==================== JUNE ==================== -->
   <div class="month-section" id="jun">
     <div class="month-heading">June 2026</div>
     <div class="cal">
@@ -525,23 +371,22 @@
         <div class="cal-day outside weekend"><div class="day-number">31</div></div>
         <div class="cal-day">
           <div class="day-number">1</div>
-          <div class="band band-planning band-start">Planning</div>
+          <div class="band band-dev band-dev-v1v2 band-span-2 band-start">DEV - V1 &amp; V2</div>
         </div>
         <div class="cal-day">
           <div class="day-number">2</div>
-          <div class="band band-planning band-mid"></div>
+          <div class="band band-dev band-mid"></div>
         </div>
         <div class="cal-day">
           <div class="day-number">3</div>
-          <div class="band band-planning band-end"></div>
+          <div class="band band-dev band-mid"></div>
           <div class="tags">
-            <div class="tag tag-release">May Stable Release</div>
-            <div class="tag tag-prerelease">Jun Pre-release 1</div>
+            <div class="tag tag-prerelease">May Pre-release 3</div>
           </div>
         </div>
         <div class="cal-day">
           <div class="day-number">4</div>
-          <div class="band band-dev band-start">Dev</div>
+          <div class="band band-dev band-mid"></div>
         </div>
         <div class="cal-day">
           <div class="day-number">5</div>
@@ -553,7 +398,7 @@
         <div class="cal-day weekend"><div class="day-number">7</div></div>
         <div class="cal-day">
           <div class="day-number">8</div>
-          <div class="band band-dev band-start">Dev</div>
+          <div class="band band-dev band-dev-v1v2 band-span-2 band-start">DEV - V1 &amp; V2</div>
         </div>
         <div class="cal-day">
           <div class="day-number">9</div>
@@ -563,7 +408,7 @@
           <div class="day-number">10</div>
           <div class="band band-dev band-mid"></div>
           <div class="tags">
-            <div class="tag tag-prerelease">Jun Pre-release 2</div>
+            <div class="tag tag-prerelease">May Pre-release 4</div>
           </div>
         </div>
         <div class="cal-day">
@@ -580,7 +425,7 @@
         <div class="cal-day weekend"><div class="day-number">14</div></div>
         <div class="cal-day">
           <div class="day-number">15</div>
-          <div class="band band-dev band-start">Dev</div>
+          <div class="band band-dev band-dev-v1v2 band-span-2 band-start">DEV - V1 &amp; V2</div>
         </div>
         <div class="cal-day">
           <div class="day-number">16</div>
@@ -590,7 +435,7 @@
           <div class="day-number">17</div>
           <div class="band band-dev band-mid"></div>
           <div class="tags">
-            <div class="tag tag-prerelease">Jun Pre-release 3</div>
+            <div class="tag tag-prerelease">May Pre-release 5</div>
           </div>
         </div>
         <div class="cal-day">
@@ -607,7 +452,7 @@
         <div class="cal-day weekend"><div class="day-number">21</div></div>
         <div class="cal-day">
           <div class="day-number">22</div>
-          <div class="band band-dev band-start">Dev</div>
+          <div class="band band-dev band-dev-v1v2 band-span-2 band-start">DEV - V1 &amp; V2</div>
         </div>
         <div class="cal-day">
           <div class="day-number">23</div>
@@ -617,7 +462,7 @@
           <div class="day-number">24</div>
           <div class="tags" style="margin-top:0">
             <div class="tag tag-freeze">Code Freeze</div>
-            <div class="tag tag-prerelease">Jun Pre-release 4 (RC)</div>
+            <div class="tag tag-prerelease">May Pre-release 6 (RC)</div>
           </div>
         </div>
         <div class="cal-day">
@@ -656,18 +501,777 @@
 
         <!-- Week 6: Jul 5 - 11 -->
         <div class="cal-day outside weekend"><div class="day-number">5</div></div>
-        <div class="cal-day outside"><div class="day-number">6</div></div>
-        <div class="cal-day outside"><div class="day-number">7</div></div>
+        <div class="cal-day outside">
+          <div class="day-number">6</div>
+          <div class="band band-planning band-start">Planning</div>
+        </div>
+        <div class="cal-day outside">
+          <div class="day-number">7</div>
+          <div class="band band-planning band-end"></div>
+        </div>
         <div class="cal-day outside">
           <div class="day-number">8</div>
           <div class="tags" style="margin-top:0">
-            <div class="tag tag-release">Jun Stable Release</div>
-            <div class="tag tag-prerelease">Jul Pre-release 1</div>
+            <div class="tag tag-release">May Stable Release - Last V1 Stable</div>
           </div>
         </div>
-        <div class="cal-day outside"><div class="day-number">9</div></div>
-        <div class="cal-day outside"><div class="day-number">10</div></div>
+        <div class="cal-day outside">
+          <div class="day-number">9</div>
+          <div class="band band-dev band-start">DEV - V2</div>
+        </div>
+        <div class="cal-day outside">
+          <div class="day-number">10</div>
+          <div class="band band-dev band-end"></div>
+        </div>
         <div class="cal-day outside weekend"><div class="day-number">11</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== JULY ==================== -->
+  <div class="month-section" id="jul">
+    <div class="month-heading">July 2026</div>
+    <div class="cal">
+      <div class="cal-header">
+        <div class="cal-header-cell">Sun</div>
+        <div class="cal-header-cell">Mon</div>
+        <div class="cal-header-cell">Tue</div>
+        <div class="cal-header-cell">Wed</div>
+        <div class="cal-header-cell">Thu</div>
+        <div class="cal-header-cell">Fri</div>
+        <div class="cal-header-cell weekend">Sat</div>
+      </div>
+      <div class="cal-grid">
+        <!-- Week 1: Jun 28 - Jul 4 -->
+        <div class="cal-day outside weekend"><div class="day-number">28</div></div>
+        <div class="cal-day outside">
+          <div class="day-number">29</div>
+          <div class="band band-endgame band-start">Endgame</div>
+        </div>
+        <div class="cal-day outside">
+          <div class="day-number">30</div>
+          <div class="band band-endgame band-mid"></div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">1</div>
+          <div class="band band-endgame band-mid"></div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">2</div>
+          <div class="band band-endgame band-mid"></div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">3</div>
+          <div class="band band-endgame band-end"></div>
+        </div>
+        <div class="cal-day weekend"><div class="day-number">4</div></div>
+
+        <!-- Week 2: Jul 5 - 11 -->
+        <div class="cal-day weekend"><div class="day-number">5</div></div>
+        <div class="cal-day">
+          <div class="day-number">6</div>
+          <div class="band band-planning band-start">Planning</div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">7</div>
+          <div class="band band-planning band-end"></div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">8</div>
+          <div class="tags" style="margin-top:0">
+            <div class="tag tag-release">May Stable Release - Last V1 Stable</div>
+          </div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">9</div>
+          <div class="band band-dev band-start">DEV - V2</div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">10</div>
+          <div class="band band-dev band-end"></div>
+        </div>
+        <div class="cal-day weekend"><div class="day-number">11</div></div>
+
+        <!-- Week 3: Jul 12 - 18 -->
+        <div class="cal-day weekend"><div class="day-number">12</div></div>
+        <div class="cal-day">
+          <div class="day-number">13</div>
+          <div class="band band-dev band-start">DEV - V2</div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">14</div>
+          <div class="band band-dev band-mid"></div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">15</div>
+          <div class="band band-dev band-mid"></div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">16</div>
+          <div class="band band-dev band-mid"></div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">17</div>
+          <div class="band band-dev band-end"></div>
+        </div>
+        <div class="cal-day weekend"><div class="day-number">18</div></div>
+
+        <!-- Week 4: Jul 19 - 25 -->
+        <div class="cal-day weekend"><div class="day-number">19</div></div>
+        <div class="cal-day">
+          <div class="day-number">20</div>
+          <div class="band band-dev band-start">DEV - V2</div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">21</div>
+          <div class="band band-dev band-mid"></div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">22</div>
+          <div class="band band-dev band-mid"></div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">23</div>
+          <div class="band band-dev band-mid"></div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">24</div>
+          <div class="band band-dev band-end"></div>
+        </div>
+        <div class="cal-day weekend"><div class="day-number">25</div></div>
+
+        <!-- Week 5: Jul 26 - Aug 1 -->
+        <div class="cal-day weekend"><div class="day-number">26</div></div>
+        <div class="cal-day">
+          <div class="day-number">27</div>
+          <div class="band band-dev band-start">DEV - V2</div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">28</div>
+          <div class="band band-dev band-mid"></div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">29</div>
+          <div class="band band-dev band-mid"></div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">30</div>
+          <div class="band band-dev band-mid"></div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">31</div>
+          <div class="band band-dev band-end"></div>
+        </div>
+        <div class="cal-day outside weekend"><div class="day-number">1</div></div>
+
+        <!-- Week 6: Aug 2 - 8 -->
+        <div class="cal-day outside weekend"><div class="day-number">2</div></div>
+        <div class="cal-day outside">
+          <div class="day-number">3</div>
+          <div class="band band-planning band-start">Planning</div>
+        </div>
+        <div class="cal-day outside">
+          <div class="day-number">4</div>
+          <div class="band band-planning band-end"></div>
+        </div>
+        <div class="cal-day outside">
+          <div class="day-number">5</div>
+          <div class="band band-dev band-start">DEV - V2</div>
+        </div>
+        <div class="cal-day outside">
+          <div class="day-number">6</div>
+          <div class="band band-dev band-mid"></div>
+        </div>
+        <div class="cal-day outside">
+          <div class="day-number">7</div>
+          <div class="band band-dev band-end"></div>
+        </div>
+        <div class="cal-day outside weekend"><div class="day-number">8</div></div>
+
+        <!-- Week 7: Aug 9 - 15 -->
+        <div class="cal-day outside weekend"><div class="day-number">9</div></div>
+        <div class="cal-day outside">
+          <div class="day-number">10</div>
+          <div class="band band-dev band-start">DEV - V2</div>
+        </div>
+        <div class="cal-day outside">
+          <div class="day-number">11</div>
+          <div class="band band-dev band-mid"></div>
+        </div>
+        <div class="cal-day outside">
+          <div class="day-number">12</div>
+          <div class="band band-dev band-mid"></div>
+          <div class="tags">
+            <div class="tag tag-prerelease">Aug Pre-release 1 - V2</div>
+          </div>
+        </div>
+        <div class="cal-day outside">
+          <div class="day-number">13</div>
+          <div class="band band-dev band-mid"></div>
+        </div>
+        <div class="cal-day outside">
+          <div class="day-number">14</div>
+          <div class="band band-dev band-end"></div>
+        </div>
+        <div class="cal-day outside weekend"><div class="day-number">15</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== AUGUST ==================== -->
+  <div class="month-section" id="aug">
+    <div class="month-heading">August 2026</div>
+    <div class="cal">
+      <div class="cal-header">
+        <div class="cal-header-cell">Sun</div>
+        <div class="cal-header-cell">Mon</div>
+        <div class="cal-header-cell">Tue</div>
+        <div class="cal-header-cell">Wed</div>
+        <div class="cal-header-cell">Thu</div>
+        <div class="cal-header-cell">Fri</div>
+        <div class="cal-header-cell weekend">Sat</div>
+      </div>
+      <div class="cal-grid">
+        <!-- Week 1: Jul 26 - Aug 1 -->
+        <div class="cal-day outside weekend"><div class="day-number">26</div></div>
+        <div class="cal-day outside"><div class="day-number">27</div></div>
+        <div class="cal-day outside"><div class="day-number">28</div></div>
+        <div class="cal-day outside"><div class="day-number">29</div></div>
+        <div class="cal-day outside"><div class="day-number">30</div></div>
+        <div class="cal-day outside"><div class="day-number">31</div></div>
+        <div class="cal-day weekend"><div class="day-number">1</div></div>
+
+        <!-- Week 2: Aug 2 - 8 -->
+        <div class="cal-day weekend"><div class="day-number">2</div></div>
+        <div class="cal-day">
+          <div class="day-number">3</div>
+          <div class="band band-planning band-start">Planning</div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">4</div>
+          <div class="band band-planning band-end"></div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">5</div>
+          <div class="band band-dev band-start">DEV - V2</div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">6</div>
+          <div class="band band-dev band-mid"></div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">7</div>
+          <div class="band band-dev band-end"></div>
+        </div>
+        <div class="cal-day weekend"><div class="day-number">8</div></div>
+
+        <!-- Week 3: Aug 9 - 15 -->
+        <div class="cal-day weekend"><div class="day-number">9</div></div>
+        <div class="cal-day">
+          <div class="day-number">10</div>
+          <div class="band band-dev band-start">DEV - V2</div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">11</div>
+          <div class="band band-dev band-mid"></div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">12</div>
+          <div class="band band-dev band-mid"></div>
+          <div class="tags">
+            <div class="tag tag-prerelease">Aug Pre-release 1 - V2</div>
+          </div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">13</div>
+          <div class="band band-dev band-mid"></div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">14</div>
+          <div class="band band-dev band-end"></div>
+        </div>
+        <div class="cal-day weekend"><div class="day-number">15</div></div>
+
+        <!-- Week 4: Aug 16 - 22 -->
+        <div class="cal-day weekend"><div class="day-number">16</div></div>
+        <div class="cal-day">
+          <div class="day-number">17</div>
+          <div class="band band-dev band-start">DEV - V2</div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">18</div>
+          <div class="band band-dev band-mid"></div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">19</div>
+          <div class="band band-dev band-mid"></div>
+          <div class="tags">
+            <div class="tag tag-prerelease">Aug Pre-release 2 - V2</div>
+          </div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">20</div>
+          <div class="band band-dev band-mid"></div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">21</div>
+          <div class="band band-dev band-end"></div>
+        </div>
+        <div class="cal-day weekend"><div class="day-number">22</div></div>
+
+        <!-- Week 5: Aug 23 - 29 -->
+        <div class="cal-day weekend"><div class="day-number">23</div></div>
+        <div class="cal-day">
+          <div class="day-number">24</div>
+          <div class="band band-dev band-start">DEV - V2</div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">25</div>
+          <div class="band band-dev band-mid"></div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">26</div>
+          <div class="band band-dev band-mid"></div>
+          <div class="tags">
+            <div class="tag tag-prerelease">Aug Pre-release 3 - V2</div>
+          </div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">27</div>
+          <div class="band band-dev band-mid"></div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">28</div>
+          <div class="band band-dev band-end"></div>
+        </div>
+        <div class="cal-day weekend"><div class="day-number">29</div></div>
+
+        <!-- Week 6: Aug 30 - Sep 5 -->
+        <div class="cal-day weekend"><div class="day-number">30</div></div>
+        <div class="cal-day">
+          <div class="day-number">31</div>
+          <div class="band band-planning band-start">Planning</div>
+        </div>
+        <div class="cal-day outside">
+          <div class="day-number">1</div>
+          <div class="band band-planning band-end"></div>
+        </div>
+        <div class="cal-day outside">
+          <div class="day-number">2</div>
+          <div class="band band-dev band-start">DEV - V2</div>
+        </div>
+        <div class="cal-day outside">
+          <div class="day-number">3</div>
+          <div class="band band-dev band-mid"></div>
+        </div>
+        <div class="cal-day outside">
+          <div class="day-number">4</div>
+          <div class="band band-dev band-end"></div>
+        </div>
+        <div class="cal-day outside weekend"><div class="day-number">5</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SEPTEMBER ==================== -->
+  <div class="month-section" id="sep">
+    <div class="month-heading">September 2026</div>
+    <div class="cal">
+      <div class="cal-header">
+        <div class="cal-header-cell">Sun</div>
+        <div class="cal-header-cell">Mon</div>
+        <div class="cal-header-cell">Tue</div>
+        <div class="cal-header-cell">Wed</div>
+        <div class="cal-header-cell">Thu</div>
+        <div class="cal-header-cell">Fri</div>
+        <div class="cal-header-cell weekend">Sat</div>
+      </div>
+      <div class="cal-grid">
+        <!-- Week 1: Aug 30 - Sep 5 -->
+        <div class="cal-day outside weekend"><div class="day-number">30</div></div>
+        <div class="cal-day outside">
+          <div class="day-number">31</div>
+          <div class="band band-planning band-start">Planning</div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">1</div>
+          <div class="band band-planning band-end"></div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">2</div>
+          <div class="band band-dev band-start">DEV - V2</div>
+          <div class="tags">
+            <div class="tag tag-prerelease">Aug Pre-release 4 - V2</div>
+          </div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">3</div>
+          <div class="band band-dev band-mid"></div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">4</div>
+          <div class="band band-dev band-end"></div>
+        </div>
+        <div class="cal-day weekend"><div class="day-number">5</div></div>
+
+        <!-- Week 2: Sep 6 - 12 -->
+        <div class="cal-day weekend"><div class="day-number">6</div></div>
+        <div class="cal-day">
+          <div class="day-number">7</div>
+          <div class="band band-dev band-start">DEV - V2</div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">8</div>
+          <div class="band band-dev band-mid"></div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">9</div>
+          <div class="band band-dev band-mid"></div>
+          <div class="tags">
+            <div class="tag tag-prerelease">Aug Pre-release 5 - V2</div>
+          </div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">10</div>
+          <div class="band band-dev band-mid"></div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">11</div>
+          <div class="band band-dev band-end"></div>
+        </div>
+        <div class="cal-day weekend"><div class="day-number">12</div></div>
+
+        <!-- Week 3: Sep 13 - 19 -->
+        <div class="cal-day weekend"><div class="day-number">13</div></div>
+        <div class="cal-day">
+          <div class="day-number">14</div>
+          <div class="band band-dev band-start">DEV - V2</div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">15</div>
+          <div class="band band-dev band-mid"></div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">16</div>
+          <div class="band band-dev band-mid"></div>
+          <div class="tags">
+            <div class="tag tag-prerelease">Aug Pre-release 6 - V2</div>
+          </div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">17</div>
+          <div class="band band-dev band-mid"></div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">18</div>
+          <div class="band band-dev band-end"></div>
+        </div>
+        <div class="cal-day weekend"><div class="day-number">19</div></div>
+
+        <!-- Week 4: Sep 20 - 26 -->
+        <div class="cal-day weekend"><div class="day-number">20</div></div>
+        <div class="cal-day">
+          <div class="day-number">21</div>
+          <div class="band band-dev band-start">DEV - V2</div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">22</div>
+          <div class="band band-dev band-mid"></div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">23</div>
+          <div class="band band-dev band-mid"></div>
+          <div class="tags">
+            <div class="tag tag-prerelease">Aug Pre-release 7 - V2</div>
+          </div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">24</div>
+          <div class="band band-dev band-mid"></div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">25</div>
+          <div class="band band-dev band-end"></div>
+        </div>
+        <div class="cal-day weekend"><div class="day-number">26</div></div>
+
+        <!-- Week 5: Sep 27 - Oct 3 -->
+        <div class="cal-day weekend"><div class="day-number">27</div></div>
+        <div class="cal-day">
+          <div class="day-number">28</div>
+          <div class="band band-planning band-start">Planning</div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">29</div>
+          <div class="band band-planning band-end"></div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">30</div>
+          <div class="band band-dev band-start">DEV - V2</div>
+          <div class="tags">
+            <div class="tag tag-prerelease">Aug Pre-release 8 - V2</div>
+          </div>
+        </div>
+        <div class="cal-day outside">
+          <div class="day-number">1</div>
+          <div class="band band-dev band-mid"></div>
+        </div>
+        <div class="cal-day outside">
+          <div class="day-number">2</div>
+          <div class="band band-dev band-end"></div>
+        </div>
+        <div class="cal-day outside weekend"><div class="day-number">3</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== OCTOBER ==================== -->
+  <div class="month-section" id="oct">
+    <div class="month-heading">October 2026</div>
+    <div class="cal">
+      <div class="cal-header">
+        <div class="cal-header-cell">Sun</div>
+        <div class="cal-header-cell">Mon</div>
+        <div class="cal-header-cell">Tue</div>
+        <div class="cal-header-cell">Wed</div>
+        <div class="cal-header-cell">Thu</div>
+        <div class="cal-header-cell">Fri</div>
+        <div class="cal-header-cell weekend">Sat</div>
+      </div>
+      <div class="cal-grid">
+        <!-- Week 1: Sep 27 - Oct 3 -->
+        <div class="cal-day outside weekend"><div class="day-number">27</div></div>
+        <div class="cal-day outside">
+          <div class="day-number">28</div>
+          <div class="band band-planning band-start">Planning</div>
+        </div>
+        <div class="cal-day outside">
+          <div class="day-number">29</div>
+          <div class="band band-planning band-end"></div>
+        </div>
+        <div class="cal-day outside">
+          <div class="day-number">30</div>
+          <div class="band band-dev band-start">DEV - V2</div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">1</div>
+          <div class="band band-dev band-mid"></div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">2</div>
+          <div class="band band-dev band-end"></div>
+        </div>
+        <div class="cal-day weekend"><div class="day-number">3</div></div>
+
+        <!-- Week 2: Oct 4 - 10 -->
+        <div class="cal-day weekend"><div class="day-number">4</div></div>
+        <div class="cal-day">
+          <div class="day-number">5</div>
+          <div class="band band-dev band-start">DEV - V2</div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">6</div>
+          <div class="band band-dev band-mid"></div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">7</div>
+          <div class="band band-dev band-mid"></div>
+          <div class="tags">
+            <div class="tag tag-prerelease">Aug Pre-release 9 - V2</div>
+          </div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">8</div>
+          <div class="band band-dev band-mid"></div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">9</div>
+          <div class="band band-dev band-end"></div>
+        </div>
+        <div class="cal-day weekend"><div class="day-number">10</div></div>
+
+        <!-- Week 3: Oct 11 - 17 -->
+        <div class="cal-day weekend"><div class="day-number">11</div></div>
+        <div class="cal-day">
+          <div class="day-number">12</div>
+          <div class="band band-dev band-start">DEV - V2</div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">13</div>
+          <div class="band band-dev band-mid"></div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">14</div>
+          <div class="band band-dev band-mid"></div>
+          <div class="tags">
+            <div class="tag tag-prerelease">Aug Pre-release 10 - V2</div>
+          </div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">15</div>
+          <div class="band band-dev band-mid"></div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">16</div>
+          <div class="band band-dev band-end"></div>
+        </div>
+        <div class="cal-day weekend"><div class="day-number">17</div></div>
+
+        <!-- Week 4: Oct 18 - 24 -->
+        <div class="cal-day weekend"><div class="day-number">18</div></div>
+        <div class="cal-day">
+          <div class="day-number">19</div>
+          <div class="band band-dev band-start">DEV - V2</div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">20</div>
+          <div class="band band-dev band-end"></div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">21</div>
+          <div class="tags" style="margin-top:0">
+            <div class="tag tag-freeze">Code Freeze</div>
+            <div class="tag tag-prerelease">Aug Pre-release 11 (RC) - V2</div>
+          </div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">22</div>
+          <div class="band band-endgame band-start">Endgame</div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">23</div>
+          <div class="band band-endgame band-end"></div>
+        </div>
+        <div class="cal-day weekend"><div class="day-number">24</div></div>
+
+        <!-- Week 5: Oct 25 - 31 -->
+        <div class="cal-day weekend"><div class="day-number">25</div></div>
+        <div class="cal-day">
+          <div class="day-number">26</div>
+          <div class="band band-endgame band-start">Endgame</div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">27</div>
+          <div class="band band-endgame band-mid"></div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">28</div>
+          <div class="band band-endgame band-mid"></div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">29</div>
+          <div class="band band-endgame band-mid"></div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">30</div>
+          <div class="band band-endgame band-end"></div>
+        </div>
+        <div class="cal-day weekend"><div class="day-number">31</div></div>
+
+        <!-- Week 6: Nov 1 - 7 -->
+        <div class="cal-day outside weekend"><div class="day-number">1</div></div>
+        <div class="cal-day outside">
+          <div class="day-number">2</div>
+          <div class="band band-endgame band-start">Endgame</div>
+        </div>
+        <div class="cal-day outside">
+          <div class="day-number">3</div>
+          <div class="band band-endgame band-mid"></div>
+        </div>
+        <div class="cal-day outside">
+          <div class="day-number">4</div>
+          <div class="band band-endgame band-mid"></div>
+        </div>
+        <div class="cal-day outside">
+          <div class="day-number">5</div>
+          <div class="band band-endgame band-mid"></div>
+        </div>
+        <div class="cal-day outside">
+          <div class="day-number">6</div>
+          <div class="band band-endgame band-end"></div>
+        </div>
+        <div class="cal-day outside weekend"><div class="day-number">7</div></div>
+
+        <!-- Week 7: Nov 8 - 14 -->
+        <div class="cal-day outside weekend"><div class="day-number">8</div></div>
+        <div class="cal-day outside">
+          <div class="day-number">9</div>
+          <div class="band band-endgame band-start">Endgame</div>
+        </div>
+        <div class="cal-day outside">
+          <div class="day-number">10</div>
+          <div class="band band-endgame band-end"></div>
+        </div>
+        <div class="cal-day outside">
+          <div class="day-number">11</div>
+          <div class="tags" style="margin-top:0">
+            <div class="tag tag-release">Aug Stable Release - V2</div>
+          </div>
+        </div>
+        <div class="cal-day outside"><div class="day-number">12</div></div>
+        <div class="cal-day outside"><div class="day-number">13</div></div>
+        <div class="cal-day outside weekend"><div class="day-number">14</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== NOVEMBER ==================== -->
+  <div class="month-section" id="nov">
+    <div class="month-heading">November 2026</div>
+    <div class="cal">
+      <div class="cal-header">
+        <div class="cal-header-cell">Sun</div>
+        <div class="cal-header-cell">Mon</div>
+        <div class="cal-header-cell">Tue</div>
+        <div class="cal-header-cell">Wed</div>
+        <div class="cal-header-cell">Thu</div>
+        <div class="cal-header-cell">Fri</div>
+        <div class="cal-header-cell weekend">Sat</div>
+      </div>
+      <div class="cal-grid">
+        <!-- Week 1: Nov 1 - 7 -->
+        <div class="cal-day weekend"><div class="day-number">1</div></div>
+        <div class="cal-day">
+          <div class="day-number">2</div>
+          <div class="band band-endgame band-start">Endgame</div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">3</div>
+          <div class="band band-endgame band-mid"></div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">4</div>
+          <div class="band band-endgame band-mid"></div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">5</div>
+          <div class="band band-endgame band-mid"></div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">6</div>
+          <div class="band band-endgame band-end"></div>
+        </div>
+        <div class="cal-day weekend"><div class="day-number">7</div></div>
+
+        <!-- Week 2: Nov 8 - 14 -->
+        <div class="cal-day weekend"><div class="day-number">8</div></div>
+        <div class="cal-day">
+          <div class="day-number">9</div>
+          <div class="band band-endgame band-start">Endgame</div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">10</div>
+          <div class="band band-endgame band-end"></div>
+        </div>
+        <div class="cal-day">
+          <div class="day-number">11</div>
+          <div class="tags" style="margin-top:0">
+            <div class="tag tag-release">Aug Stable Release - V2</div>
+          </div>
+        </div>
+        <div class="cal-day"><div class="day-number">12</div></div>
+        <div class="cal-day"><div class="day-number">13</div></div>
+        <div class="cal-day weekend"><div class="day-number">14</div></div>
       </div>
     </div>
   </div>
