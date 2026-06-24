@@ -6,6 +6,7 @@ body:
   attributes:
     label: Describe the issue
     description: Briefly explain what you're trying to build and a clear concise description of what you're experiencing.
+    placeholder: Ex. I'm building a C# backend for a web app and...
   validations:
     required: false
 - type: textarea
