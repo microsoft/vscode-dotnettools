@@ -4,13 +4,20 @@ labels: [bug]
 body:
 - type: textarea
   attributes:
-    label: Describe the Issue
-    description: A clear concise description of what you're experiencing.
+    label: Describe the issue
+    description: Briefly explain what you're trying to build and a clear concise description of what you're experiencing.
   validations:
     required: false
 - type: textarea
   attributes:
-    label: Steps To Reproduce
+    label: Collect logs
+    description: |
+      Please run the ".NET: Collect C# Dev Kit Logs" command in VS Code and attach the resulting zip file to this issue.
+  validations:
+    required: true
+- type: textarea
+  attributes:
+    label: Steps to reproduce
     description: Steps to reproduce the behavior.
     placeholder: |
       1. In this environment...
@@ -21,13 +28,13 @@ body:
     required: false
 - type: textarea
   attributes:
-    label: Expected Behavior
+    label: Expected behavior
     description: A concise description of what you expected to happen.
   validations:
     required: false
 - type: textarea
   attributes:
-    label: Environment Information
+    label: Environment information
     description: Information about your environment
     placeholder: |
       - OS: [e.g. Windows, macOS, Linux]
