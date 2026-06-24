@@ -5,7 +5,7 @@ body:
 - type: textarea
   attributes:
     label: Describe the issue
-    description: A clear concise description of what you're experiencing.
+    description: Briefly explain what you're trying to build and a clear concise description of what you're experiencing.
   validations:
     required: false
 - type: textarea
