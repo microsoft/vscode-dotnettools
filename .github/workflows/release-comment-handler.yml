@@ -13,16 +13,17 @@ jobs:
       issues: write
       contents: read
     steps:
-      - name: Gather participants
-        id: participants
+      - name: Gather participants and post comment
         uses: actions/github-script@v7
         with:
           script: |
             console.log("=== WORKFLOW START ===");
             const issue_number = context.payload.issue.number;
             const repo = context.repo;
+            const labelName = context.payload.label.name;
 
             console.log(`Processing issue #${issue_number} in ${repo.owner}/${repo.repo}`);
+            console.log(`Label: ${labelName}`);
 
             // Get issue details (for author)
             const issue = context.payload.issue;
@@ -40,7 +41,7 @@ jobs:
             console.log("=== FETCHING COMMENTS ===");
             const comments = await github.paginate(
               github.rest.issues.listComments,
-              { ...repo, issue_number }
+              { ...repo, issue_number, per_page: 100 }
             );
             console.log(`Found ${comments.length} comments`);
             
@@ -59,7 +60,7 @@ jobs:
             for (const comment of comments) {
               const reactions = await github.paginate(
                 github.rest.reactions.listForIssueComment,
-                { ...repo, comment_id: comment.id }
+                { ...repo, comment_id: comment.id, per_page: 100 }
               );
               totalCommentReactions += reactions.length;
               reactions.forEach(r => {
@@ -73,7 +74,7 @@ jobs:
             // Get reactions on main issue body
             const issue_reactions = await github.paginate(
               github.rest.reactions.listForIssue,
-              { ...repo, issue_number }
+              { ...repo, issue_number, per_page: 100 }
             );
             console.log(`Found ${issue_reactions.length} reactions on issue body`);
             
@@ -108,38 +109,12 @@ jobs:
             console.log(`Final participants count: ${all_users.length}`);
             console.log(`Final participants: ${all_users.join(', ')}`);
 
-            if (all_users.length === 0) {
-              console.log("No participants to mention after filtering");
-              const fs = require('fs');
-              fs.appendFileSync(process.env.GITHUB_ENV, 'MENTIONS=\n');
-              return;
-            }
-
+            // Generate mentions
             const mentions = all_users.map(u => `@${u}`).join(' ');
-            console.log(`Generated mentions: ${mentions}`);
-            console.log(`Setting environment variable 'MENTIONS' to: "${mentions}"`);
+            console.log(`Generated mentions for ${all_users.length} users`);
+            console.log(`Mentions string length: ${mentions.length} characters`);
 
-            const fs = require('fs');
-            fs.appendFileSync(process.env.GITHUB_ENV, `MENTIONS=${mentions}\n`);
-            return { mentions: mentions };
-          result-encoding: string
-
-      - name: Add label comment
-        uses: actions/github-script@v7
-        with:
-          script: |
-            console.log("=== STEP 2: ADD COMMENT ===");
-            console.log("Environment variable access:");
-            console.log("process.env.MENTIONS:", process.env.MENTIONS);
-            
-            const mentions = process.env.MENTIONS || '';
-            const labelName = context.payload.label.name;
-            
-            console.log(`Processing label: ${labelName}`);
-            console.log(`Mentions received: "${mentions}"`);
-            console.log(`Mentions length: ${mentions.length}`);
-            console.log(`Mentions trimmed length: ${mentions.trim().length}`);
-            
+            // Create comment message
             let message;
             
             if (labelName === 'prerelease') {
@@ -158,13 +133,13 @@ jobs:
               console.log(`Generated stable message ${mentions.trim() !== "" ? "with" : "without"} mentions`);
             }
 
-            console.log(`Final message length: ${message.length}`);
-            console.log(`Creating comment on issue #${context.payload.issue.number}`);
+            console.log(`Final message length: ${message.length} characters`);
+            console.log(`Creating comment on issue #${issue_number}`);
 
             await github.rest.issues.createComment({
-              ...context.repo,
-              issue_number: context.payload.issue.number,
+              ...repo,
+              issue_number: issue_number,
               body: message
             });
             
-            console.log("Comment created successfully");
+            console.log("Comment created successfully with all participants mentioned");
