@@ -2,6 +2,14 @@
 
 This repository is where we (Microsoft) gather and interact with the community around the [C# Dev Kit extension](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit) for Visual Studio Code. To report an issue here, ideally you would use the 'Report an Issue' capability within VS Code which will log an issue in this repository for us to triage and keep updated.
 
+## Documentation
+
+- [C# Dev Kit Workspace Requirements](docs/workspace-requirements.md)
+- [Why Workspace Requirements uses the current SDK](docs/workspace-requirements-performance.md)
+- [Install and manage SDKs and runtimes](docs/workspace-requirements-installation.md)
+- [Prepare Workspace Requirements for offline use](docs/workspace-requirements-offline.md)
+- [Troubleshoot failed Workspace Requirements stages](docs/workspace-requirements-troubleshooting.md)
+
 ## Contributing
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
