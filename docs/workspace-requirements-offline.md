@@ -20,6 +20,8 @@ An offline workspace needs:
 
 ## Verify before disconnecting
 
+Only run restore, build, test, or application commands for repositories you trust. These operations can execute repository-controlled MSBuild targets, tasks, scripts, and package behavior outside VS Code's Workspace Trust protections.
+
 Open a terminal at the workspace root and run:
 
 ```console

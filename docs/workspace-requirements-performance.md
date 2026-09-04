@@ -35,6 +35,8 @@ C# Dev Kit's Fast Build path avoids entering MSBuild when it can prove that outp
 
 The benchmark verified byte-identical outputs with SHA-256 and observed coefficient of variation at or below 7%. Larger real-world gains are possible when a no-op build can use the optimized skip path or when implementation-only changes avoid dependent recompilation, but the exact benefit depends on the project graph.
 
+Fast Build is a C# Dev Kit capability that complements the current SDK strategy. This benchmark does not compare SDK generations, and selecting a newer SDK alone does not produce the measured Fast Build gain. A current supported SDK provides the MSBuild and tooling foundation on which C# Dev Kit can safely build and continue improving this path.
+
 ### Coordinating concurrent builds
 
 AI agents, editors, terminals, and background tools can start several builds on one machine. Without coordination, each MSBuild process can independently request a large worker pool, creating CPU contention and memory pressure.
@@ -48,6 +50,8 @@ The [MSBuild Build Coordinator](https://github.com/dotnet/msbuild/blob/main/docu
 | Total peak memory | 45.3 GB | 12.7 GB | 72% less |
 
 This benchmark represents a deliberately high-contention workload. Its purpose is to demonstrate why all participating tools need a current SDK/MSBuild with the same coordination capabilities; ordinary single-build workloads should not expect the same ratios.
+
+Using a coordinator-capable SDK does not enable coordination by itself. The MSBuild Coordinator is optional and must be enabled, and every participating build must run through a compatible coordinated MSBuild path to share the system-wide budget. Workspace Requirements establishes a supported tooling foundation; it does not promise that every external build tool or command is participating in coordination.
 
 ## Why Workspace Requirements asks users to update
 

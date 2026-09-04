@@ -27,6 +27,8 @@ After resolving the cause, select **Recheck workspace**.
 
 ## Verify the workspace outside C# Dev Kit
 
+Only run restore, build, test, or application commands for repositories you trust. These operations can execute repository-controlled MSBuild targets, tasks, scripts, and package behavior outside VS Code's Workspace Trust protections.
+
 From a terminal opened at the same workspace folder, run:
 
 ```console

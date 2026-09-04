@@ -11,7 +11,7 @@ C# Dev Kit needs two different parts of .NET to be current and complete:
 
 The tooling SDK and project target frameworks do not have to be the same generation. For example, a project targeting `net8.0` can be built with a newer supported tooling SDK while still requiring the .NET 8 runtime to run, debug, or test. A multi-targeted workspace may need several runtime bands installed side by side.
 
-The supported tooling generation advances with .NET releases. While .NET 11 is in preview, the default remains the supported .NET 10 SDK and .NET 11 is an explicit opt-in. When .NET 11 releases, Workspace Requirements will require the supported .NET 11 SDK as the default. Trying .NET 12 Preview will require a new .NET 12-specific opt-in flag and command; an earlier preview preference will not silently move users to the next preview generation.
+The supported tooling generation advances through C# Dev Kit releases. While .NET 11 is in preview, the default remains the supported .NET 10 SDK and .NET 11 is an explicit opt-in. After .NET 11 releases, a C# Dev Kit update will require the supported .NET 11 SDK as the default. A later C# Dev Kit update will introduce a new .NET 12-specific opt-in flag and command for trying .NET 12 Preview; an earlier preview preference will not silently move users to the next preview generation.
 
 For the normal setup:
 
@@ -27,7 +27,7 @@ C# Dev Kit relies on capabilities delivered in the .NET SDK and MSBuild—not on
 
 Why the latest supported SDK, rather than simply any installed SDK? These improvements ship in the SDK and MSBuild. Selecting the same older SDK everywhere may make behavior consistent, but it cannot provide capabilities that were not included in that SDK. Staying current is how C# Dev Kit can keep delivering performance and reliability improvements across the .NET toolchain.
 
-See [measured examples from Aspire, Fast Build, and concurrent MSBuild workloads](workspace-requirements-performance.md) for the kinds of time-to-IntelliSense, memory, and incremental-build improvements this work enables.
+See [measured examples from Aspire, Fast Build, and concurrent MSBuild workloads](workspace-requirements-performance.md) for the kinds of time-to-IntelliSense, memory, and incremental-build improvements available across the current C# Dev Kit and .NET toolchain. These are complementary improvements; changing SDK versions alone does not produce every measured result.
 
 This matters even more when command-line tools and AI agents run builds in parallel. If each tool selects a different SDK or performs the same project work independently, builds compete for CPU and memory and cannot reliably share improvements. A consistent, current tooling SDK is the foundation for making those operations coordinated and avoiding unnecessary work.
 
