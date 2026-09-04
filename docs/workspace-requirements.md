@@ -11,7 +11,7 @@ C# Dev Kit needs two different parts of .NET to be current and complete:
 
 The tooling SDK and project target frameworks do not have to be the same generation. For example, a project targeting `net8.0` can be built with a newer supported tooling SDK while still requiring the .NET 8 runtime to run, debug, or test. A multi-targeted workspace may need several runtime bands installed side by side.
 
-The supported tooling generation advances through C# Dev Kit releases. While .NET 11 is in preview, the default remains the supported .NET 10 SDK and .NET 11 is an explicit opt-in. After .NET 11 releases, a C# Dev Kit update will require the supported .NET 11 SDK as the default. A later C# Dev Kit update will introduce a new .NET 12-specific opt-in flag and command for trying .NET 12 Preview; an earlier preview preference will not silently move users to the next preview generation.
+The supported tooling generation advances with C# Dev Kit's public major version. C# Dev Kit v10.* uses the supported .NET 10 SDK by default while .NET 11 Preview is an explicit opt-in. When .NET 11 becomes stable, C# Dev Kit v11.* will require the supported .NET 11 SDK by default. It will introduce a new .NET 12-specific opt-in flag and command for trying .NET 12 Preview; an earlier preview preference will not silently move users to the next preview generation.
 
 For the normal setup:
 
@@ -28,6 +28,18 @@ C# Dev Kit relies on capabilities delivered in the .NET SDK and MSBuild—not on
 Why the latest supported SDK, rather than simply any installed SDK? These improvements ship in the SDK and MSBuild. Selecting the same older SDK everywhere may make behavior consistent, but it cannot provide capabilities that were not included in that SDK. Staying current is how C# Dev Kit can keep delivering performance and reliability improvements across the .NET toolchain.
 
 See [measured examples from Aspire, Fast Build, and concurrent MSBuild workloads](workspace-requirements-performance.md) for the kinds of time-to-IntelliSense, memory, and incremental-build improvements available across the current C# Dev Kit and .NET toolchain. These are complementary improvements; changing SDK versions alone does not produce every measured result.
+
+## Upcoming benefits of staying current
+
+More .NET development capabilities are moving into the shared SDK and MSBuild layer so editors, command-line tools, tests, and agents can benefit from the same improvements. Planned areas include:
+
+- **Coordinated builds.** Broader adoption of the [MSBuild Build Coordinator](https://github.com/dotnet/msbuild/blob/main/documentation/MSBuild-Coordinator.md) can give concurrent builds a shared machine-wide resource budget instead of allowing each process to independently exhaust CPU and memory.
+- **Priority-aware scheduling.** The [next Coordinator implementation](https://github.com/dotnet/msbuild/pull/14725) adds `Low`, `Normal`, and `High` priorities plus reserved capacity, so a latency-sensitive build can start promptly even when background builds already occupy the machine. Queue aging prevents lower-priority work from waiting forever.
+- **Shared project information and caches.** A common project model can reduce repeated evaluation work and let compatible tools reuse project information rather than each rebuilding it independently.
+- **Faster up-to-date decisions.** Moving reliable up-to-date primitives into MSBuild can help tools skip projects that have not changed and do less work for incremental builds.
+- **Consistent improvements across entry points.** When VS Code, terminal commands, tests, and agents use the same current SDK, compatible features can behave consistently regardless of where a build starts.
+
+These capabilities will arrive incrementally and may require a supporting C# Dev Kit release, SDK release, or explicit feature enablement. Workspace Requirements keeps the tooling foundation current; it does not by itself enable every upcoming feature.
 
 This matters even more when command-line tools and AI agents run builds in parallel. If each tool selects a different SDK or performs the same project work independently, builds compete for CPU and memory and cannot reliably share improvements. A consistent, current tooling SDK is the foundation for making those operations coordinated and avoiding unnecessary work.
 

@@ -66,9 +66,9 @@ If the workspace targets .NET 11, use **Use .NET 11 SDK** when offered. This cha
 
 Workspace Requirements follows the supported stable .NET generation while keeping the next preview generation behind an explicit, generation-specific opt-in:
 
-- While .NET 11 is in preview, C# Dev Kit uses the supported .NET 10 SDK by default and offers an explicit .NET 11 opt-in.
-- After .NET 11 releases, a C# Dev Kit update will require the supported .NET 11 SDK as the default tooling generation.
-- A later C# Dev Kit update will introduce a new .NET 12-specific opt-in flag and command. The .NET 11 preference will not silently opt a user into .NET 12 Preview.
+- C# Dev Kit v10.* uses the supported .NET 10 SDK by default and offers an explicit .NET 11 Preview opt-in.
+- When .NET 11 becomes stable, C# Dev Kit v11.* will require the supported .NET 11 SDK as the default tooling generation.
+- C# Dev Kit v11.* will introduce a new .NET 12-specific opt-in flag and command. The .NET 11 preference will not silently opt a user into .NET 12 Preview.
 
 This changes the SDK used to run C# Dev Kit tooling; it does not require projects to retarget. Projects can continue targeting older supported TFMs, with their corresponding runtime bands installed for Run, Debug, and Test.
 

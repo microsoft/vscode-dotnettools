@@ -13,16 +13,16 @@ These measurements illustrate the kinds of improvements enabled by the current C
 
 ### Time to IntelliSense and C# Dev Kit memory
 
-In a macOS comparison using the public [dotnet/aspire](https://github.com/dotnet/aspire) repository with 343 projects, C# Dev Kit v2 improved the time from opening the workspace until its project model was ready:
+In a macOS comparison using the public [dotnet/aspire](https://github.com/dotnet/aspire) repository with 343 projects, C# Dev Kit v10.* improved the time from opening the workspace until its project model was ready:
 
-| Scenario | C# Dev Kit v1 | C# Dev Kit v2 | Reduction |
+| Scenario | C# Dev Kit v3.* | C# Dev Kit v10.* | Reduction |
 |---|---:|---:|---:|
 | Cold cache | 121.3 seconds | 34.5 seconds | 72% |
 | Warm cache | 29.6 seconds | 0.85 seconds | 97% |
 
 In the same comparison, C# Dev Kit server memory fell from approximately 1.8 GB to 203–242 MB, a reduction of approximately 87%.
 
-This is an end-to-end C# Dev Kit v1-to-v2 comparison, not an isolated SDK benchmark. The current SDK remains important because C# Dev Kit v2 builds on SDK and MSBuild capabilities and because future improvements continue moving into that shared toolchain.
+This is an end-to-end C# Dev Kit v3.*-to-v10.* comparison, not an isolated SDK benchmark. The current SDK remains important because C# Dev Kit v10.* builds on SDK and MSBuild capabilities and because future improvements continue moving into that shared toolchain.
 
 ### Fast incremental builds
 
@@ -63,3 +63,17 @@ The newer C# Dev Kit architecture removes duplicated work from the extension, wh
 - receive performance and reliability improvements through SDK servicing.
 
 The tooling SDK is separate from project target frameworks. Updating the SDK used by C# Dev Kit does not require every project to retarget. Projects can continue targeting older supported TFMs while using their matching runtime bands for Run, Debug, and Test.
+
+## What this enables next
+
+Keeping tools on a current, consistent SDK creates a delivery path for additional improvements that are being developed across C# Dev Kit, MSBuild, and the .NET SDK:
+
+- broader participation in system-wide MSBuild coordination;
+- [priority-aware Coordinator scheduling](https://github.com/dotnet/msbuild/pull/14725), so hosts can distinguish latency-sensitive work from normal and background builds while preventing starvation;
+- shared project information and compatible caches across editors, CLI tools, and agents;
+- native up-to-date checks that avoid evaluating or building unchanged projects; and
+- faster incremental builds that perform only the work required by the change.
+
+These are forward-looking areas, not guarantees attached to a particular benchmark. Availability may depend on a future C# Dev Kit or SDK release and may initially require explicit enablement.
+
+The priority-aware scheduling work follows the base Coordinator rather than replacing it. The Coordinator first establishes one machine-wide node budget; priority scheduling then decides how that capacity is reserved and queued. In its public sustained-contention benchmark, changing only a delayed request from `Normal` to `High` reduced its grant wait from 223.7 seconds to 0.9 seconds for Roslyn and from 81.8 seconds to 1.5 seconds for Aspire. That improvement deliberately transfers capacity to the selected high-priority request, so it can reduce throughput for continuously backlogged normal-priority work.
