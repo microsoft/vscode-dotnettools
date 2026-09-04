@@ -29,13 +29,17 @@ Why the latest supported SDK, rather than simply any installed SDK? These improv
 
 See [measured examples from Aspire, Fast Build, and concurrent MSBuild workloads](workspace-requirements-performance.md) for the kinds of time-to-IntelliSense, memory, and incremental-build improvements available across the current C# Dev Kit and .NET toolchain. These are complementary improvements; changing SDK versions alone does not produce every measured result.
 
+The larger goal is to remove duplicated project-system work across the .NET ecosystem. Today, an editor, language server, `dotnet watch`, `dotnet format`, and build tools can each evaluate the same projects and maintain separate caches. That duplicates engineering effort and machine work, and it can produce different answers depending on which tool started the operation.
+
+By moving reusable project understanding, cache formats, evaluation data, and up-to-date primitives from C# Dev Kit into Roslyn, the .NET SDK, and MSBuild, the work can benefit the C# language server, `dotnet watch`, `dotnet format`, Fast Build, and other SDK-based tools. A shared foundation means an improvement can be implemented once and used across the ecosystem instead of being rebuilt independently in every product.
+
 ## Upcoming benefits of staying current
 
 More .NET development capabilities are moving into the shared SDK and MSBuild layer so editors, command-line tools, tests, and agents can benefit from the same improvements. Planned areas include:
 
 - **Coordinated builds.** Broader adoption of the [MSBuild Build Coordinator](https://github.com/dotnet/msbuild/blob/main/documentation/MSBuild-Coordinator.md) can give concurrent builds a shared machine-wide resource budget instead of allowing each process to independently exhaust CPU and memory.
 - **Priority-aware scheduling.** The [next Coordinator implementation](https://github.com/dotnet/msbuild/pull/14725) adds `Low`, `Normal`, and `High` priorities plus reserved capacity, so a latency-sensitive build can start promptly even when background builds already occupy the machine. Queue aging prevents lower-priority work from waiting forever.
-- **Shared project information and caches.** A common project model can reduce repeated evaluation work and let compatible tools reuse project information rather than each rebuilding it independently.
+- **Shared project information and caches.** A common project model can reduce repeated evaluation work and let C# Dev Kit, the C# language server, `dotnet watch`, `dotnet format`, Fast Build, and other compatible tools reuse project information rather than each rebuilding it independently.
 - **Faster up-to-date decisions.** Moving reliable up-to-date primitives into MSBuild can help tools skip projects that have not changed and do less work for incremental builds.
 - **Consistent improvements across entry points.** When VS Code, terminal commands, tests, and agents use the same current SDK, compatible features can behave consistently regardless of where a build starts.
 

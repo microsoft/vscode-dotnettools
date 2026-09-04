@@ -62,6 +62,10 @@ The newer C# Dev Kit architecture removes duplicated work from the extension, wh
 - skip work that is already up to date;
 - receive performance and reliability improvements through SDK servicing.
 
+The goal is not to keep these improvements private to C# Dev Kit. Project evaluation, cache data, up-to-date checks, and build coordination are useful to every tool that needs to understand or build a .NET project. Moving reusable capabilities into Roslyn, the .NET SDK, and MSBuild lets the C# language server, `dotnet watch`, `dotnet format`, Fast Build, and future tools share the same implementation and project understanding.
+
+That removes two kinds of duplication: teams no longer need to implement equivalent project-system features separately in each tool, and a developer's machine no longer needs every tool to repeat the same project evaluation and caching work. It also reduces inconsistent behavior caused by different tools independently interpreting the same project.
+
 The tooling SDK is separate from project target frameworks. Updating the SDK used by C# Dev Kit does not require every project to retarget. Projects can continue targeting older supported TFMs while using their matching runtime bands for Run, Debug, and Test.
 
 ## What this enables next
@@ -70,7 +74,7 @@ Keeping tools on a current, consistent SDK creates a delivery path for additiona
 
 - broader participation in system-wide MSBuild coordination;
 - [priority-aware Coordinator scheduling](https://github.com/dotnet/msbuild/pull/14725), so hosts can distinguish latency-sensitive work from normal and background builds while preventing starvation;
-- shared project information and compatible caches across editors, CLI tools, and agents;
+- shared project information and compatible caches across C# Dev Kit, the C# language server, `dotnet watch`, `dotnet format`, Fast Build, and agents;
 - native up-to-date checks that avoid evaluating or building unchanged projects; and
 - faster incremental builds that perform only the work required by the change.
 
