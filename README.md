@@ -4,11 +4,11 @@ This repository is where we (Microsoft) gather and interact with the community a
 
 ## Documentation
 
-- [C# Dev Kit Workspace Requirements](docs/workspace-requirements.md)
-- [Why Workspace Requirements uses the current SDK](docs/workspace-requirements-performance.md)
-- [Install and manage SDKs and runtimes](docs/workspace-requirements-installation.md)
-- [Prepare Workspace Requirements for offline use](docs/workspace-requirements-offline.md)
-- [Troubleshoot failed Workspace Requirements stages](docs/workspace-requirements-troubleshooting.md)
+- [C# Health Check](docs/health-check.md)
+- [Why C# Health Check uses the current SDK](docs/health-check-performance.md)
+- [Install and manage SDKs and runtimes](docs/health-check-installation.md)
+- [Prepare C# Health Check for offline use](docs/health-check-offline.md)
+- [Troubleshoot failed C# Health Check stages](docs/health-check-troubleshooting.md)
 
 ## Contributing
 

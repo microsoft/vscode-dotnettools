@@ -1,10 +1,10 @@
-# Prepare C# Dev Kit Workspace Requirements for offline use
+# Prepare C# Health Check for offline use
 
-Workspace Requirements can diagnose and use compatible components that are already installed while the machine is offline. It cannot download an SDK, runtime, workload, or NuGet package without access to the corresponding source. Prepare the machine before disconnecting, or provision the same components through your organization's offline image and package mirrors.
+C# Health Check can diagnose and use compatible components that are already installed while the machine is offline. It cannot download an SDK, runtime, workload, or NuGet package without access to the corresponding source. Prepare the machine before disconnecting, or provision the same components through your organization's offline image and package mirrors.
 
-- [Workspace Requirements overview](workspace-requirements.md)
-- [Install and manage SDKs and runtimes](workspace-requirements-installation.md)
-- [Troubleshoot failed stages](workspace-requirements-troubleshooting.md)
+- [C# Health Check overview](health-check.md)
+- [Install and manage SDKs and runtimes](health-check-installation.md)
+- [Troubleshoot failed stages](health-check-troubleshooting.md)
 
 ## Offline prerequisites
 
@@ -38,7 +38,7 @@ For repeatable enterprise provisioning, prefer an offline machine image or inter
 
 ## What works while offline
 
-- **Recheck workspace** remains safe and does not attempt installation by itself.
-- An explicit installation action will fail if its download source is unreachable. Workspace Requirements reports the failure rather than silently switching installation systems.
+- **Recheck** remains safe and does not attempt installation by itself.
+- An explicit installation action will fail if its download source is unreachable. C# Health Check reports the failure rather than silently switching installation systems.
 - NuGet restore succeeds only when all required packages and metadata are available from local caches or configured offline sources.
 - Vulnerability and update information that depends on online services may be unavailable, but this does not replace the tooling, restore, project-detection, or runtime checks.

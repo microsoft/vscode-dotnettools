@@ -2,10 +2,10 @@
 
 C# Dev Kit relies on capabilities delivered in the .NET SDK and MSBuild—not only on code contained in the extension. Staying on the latest SDK generation supported by C# Dev Kit lets the tooling use new build coordination, caching, project-evaluation, and incremental-build capabilities as they become available.
 
-- [Workspace Requirements overview](workspace-requirements.md)
-- [Install and manage SDKs and runtimes](workspace-requirements-installation.md)
-- [Prepare for offline use](workspace-requirements-offline.md)
-- [Troubleshoot failed stages](workspace-requirements-troubleshooting.md)
+- [C# Health Check overview](health-check.md)
+- [Install and manage SDKs and runtimes](health-check-installation.md)
+- [Prepare for offline use](health-check-offline.md)
+- [Troubleshoot failed stages](health-check-troubleshooting.md)
 
 ## Measured examples
 
@@ -51,9 +51,9 @@ The [MSBuild Build Coordinator](https://github.com/dotnet/msbuild/blob/main/docu
 
 This benchmark represents a deliberately high-contention workload. Its purpose is to demonstrate why all participating tools need a current SDK/MSBuild with the same coordination capabilities; ordinary single-build workloads should not expect the same ratios.
 
-Using a coordinator-capable SDK does not enable coordination by itself. The MSBuild Coordinator is optional and must be enabled, and every participating build must run through a compatible coordinated MSBuild path to share the system-wide budget. Workspace Requirements establishes a supported tooling foundation; it does not promise that every external build tool or command is participating in coordination.
+Using a coordinator-capable SDK does not enable coordination by itself. The MSBuild Coordinator is optional and must be enabled, and every participating build must run through a compatible coordinated MSBuild path to share the system-wide budget. C# Health Check establishes a supported tooling foundation; it does not promise that every external build tool or command is participating in coordination.
 
-## Why Workspace Requirements asks users to update
+## Why C# Health Check asks users to update
 
 The newer C# Dev Kit architecture removes duplicated work from the extension, while newer SDK and MSBuild releases provide capabilities that can benefit the editor, command-line builds, tests, agents, and other .NET tools. Using the same current tooling SDK helps those components:
 
