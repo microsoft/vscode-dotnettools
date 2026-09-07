@@ -8,7 +8,7 @@ Use this guide when a stage in C# Health Check reports **Failed** or **Needs att
 
 To open it manually, run **C#: Check Health** from the Command Palette in Visual Studio Code.
 
-## Install Tooling Requirements
+## Tooling Requirements
 
 For a missing SDK, incompatible `global.json`, SDK-generation selection, explicit SDK override, or missing tooling runtime, see [Install and manage .NET for C# Health Check](health-check-installation.md).
 
@@ -39,7 +39,7 @@ dotnet build --no-restore
 
 `dotnet --info` shows the SDK selected from that directory, including the effect of `global.json`. A successful restore followed by a successful build proves that the selected SDK can evaluate the projects, resolve NuGet packages, and complete the normal build.
 
-With the same SDK selection and environment, a workspace that restores and builds successfully should normally pass both **Restore NuGet Packages** and **Detect Project Configuration** in C# Health Check. During project detection, C# Dev Kit reads the evaluated target framework for every project configuration. Those target frameworks—not the build result itself—determine which project runtime versions appear in **Install Project Runtime Requirements**.
+With the same SDK selection and environment, a workspace that restores and builds successfully should normally pass both **Restore NuGet Packages** and **Detect Project Configuration** in C# Health Check. During project detection, C# Dev Kit reads the evaluated target framework for every project configuration. Those target frameworks—not the build result itself—determine which project runtime versions appear in **Project Runtime Requirements**.
 
 A successful build does not prove that every runtime needed to run, debug, or test the projects is installed. The SDK can compile a project using its targeting packs even when the corresponding shared runtime is missing. If restore or project detection still fails despite a successful terminal build, reload the VS Code window and recheck once. If the disagreement remains, collect logs and report it as a C# Dev Kit issue; include the successful terminal commands, the SDK reported by `dotnet --info`, and the projects' target frameworks.
 
@@ -54,7 +54,7 @@ This stage runs project evaluation after restore. If detection fails:
 
 Project evaluation can fail because of invalid MSBuild configuration, unavailable SDK workloads, failing imported targets, or restore errors that prevent design-time build.
 
-## Install Project Runtime Requirements
+## Project Runtime Requirements
 
 C# Health Check derives runtime requirements from the evaluated target frameworks. See [Install project runtime requirements](health-check-installation.md#install-project-runtime-requirements) for automatic and manual installation options.
 

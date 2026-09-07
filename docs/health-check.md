@@ -57,10 +57,10 @@ To open it manually, run **C#: Check Health** from the Command Palette in Visual
 
 | Stage | What C# Dev Kit checks |
 |---|---|
-| **Install Tooling Requirements** | A supported .NET SDK can be selected and is compatible with the workspace's `global.json`. |
+| **Tooling Requirements** | A supported .NET SDK can be selected and is compatible with the workspace's `global.json`. |
 | **Restore NuGet Packages** | NuGet restore completed sufficiently for project evaluation. |
 | **Detect Project Configuration** | C# Dev Kit evaluated the projects and identified their target frameworks. |
-| **Install Project Runtime Requirements** | The .NET and ASP.NET Core runtimes needed to run, debug, or test the evaluated projects are available. |
+| **Project Runtime Requirements** | The .NET and ASP.NET Core runtimes needed to run, debug, or test the evaluated projects are available. |
 
 A red **Failed** state blocks a later stage. An amber **Needs attention** state means C# Dev Kit has usable project information, but part of the workspace is degraded or a project runtime is missing.
 
