@@ -12,7 +12,7 @@ To open C# Doctor, run **C#: Check health** from the Command Palette in Visual S
 
 ## Tooling Requirements
 
-For a missing SDK, incompatible `global.json`, SDK-generation selection, explicit SDK override, or missing tooling runtime, see [Install and manage .NET for C# Doctor](health-check-installation.md).
+For a missing SDK, incompatible `global.json`, SDK-generation selection, explicit SDK override, or missing tooling runtime, see [Install and manage .NET with C# Doctor](health-check-installation.md).
 
 ## Restore NuGet Packages
 

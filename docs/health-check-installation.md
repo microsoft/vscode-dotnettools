@@ -1,6 +1,6 @@
 <a id="install-and-manage-net-for-c-health-check"></a>
 
-# Install and manage .NET for C# Doctor
+# Install and manage .NET with C# Doctor
 
 This guide explains how C# Dev Kit selects and installs the tooling SDK and the project runtimes shown in C# Doctor.
 
