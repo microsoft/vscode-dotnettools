@@ -2,7 +2,7 @@
 
 # Prepare C# Doctor for offline use
 
-C# Doctor can diagnose and use compatible components that are already installed while the machine is offline. It cannot download an SDK, runtime, workload, or NuGet package without access to the corresponding source. Prepare the machine before disconnecting, or provision the same components through your organization's offline image and package mirrors.
+C# Doctor can diagnose an offline workspace by using compatible components that are already installed. It cannot download an SDK, runtime, workload, or NuGet package without access to the corresponding source. Prepare the machine before disconnecting, or provision the same components through your organization's offline image and package mirrors.
 
 - [C# Doctor overview](health-check.md)
 - [Install and manage SDKs and runtimes](health-check-installation.md)

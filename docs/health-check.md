@@ -2,7 +2,7 @@
 
 # C# Doctor
 
-C# Dev Kit checks that the .NET tooling and project runtimes required by your workspace are available. If something needs attention, **C# Doctor** identifies the affected stage and offers a recovery action.
+C# Doctor is C# Dev Kit's health-check view. It checks that the .NET tooling and project runtimes required by your workspace are available, identifies the affected stage when something needs attention, and offers a recovery action.
 
 ## The happy path
 

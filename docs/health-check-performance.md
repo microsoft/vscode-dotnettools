@@ -55,7 +55,7 @@ Using a coordinator-capable SDK does not enable coordination by itself. The MSBu
 
 <a id="why-c-health-check-asks-users-to-update"></a>
 
-## Why C# Doctor asks users to update
+## Why C# Doctor recommends updating the SDK
 
 The newer C# Dev Kit architecture removes duplicated work from the extension, while newer SDK and MSBuild releases provide capabilities that can benefit the editor, command-line builds, tests, agents, and other .NET tools. Using the same current tooling SDK helps those components:
 

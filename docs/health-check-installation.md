@@ -10,7 +10,7 @@ This guide explains how C# Dev Kit selects and installs the tooling SDK and the 
 
 ## Installation requires your consent
 
-Opening C# Doctor, refreshing the results, restoring the workspace, or selecting **Recheck** does not install software. Installation starts only after you select an explicit action such as **Install .NET SDK** or **Install missing .NET runtimes**.
+Opening C# Doctor, refreshing the results, restoring the workspace, or selecting **Recheck** does not install software. Installation starts only after you select an explicit action to install the required SDK or missing runtimes.
 
 **Recheck** refreshes the diagnosis after you change an SDK, runtime, setting, or `global.json`. It does not install anything.
 
