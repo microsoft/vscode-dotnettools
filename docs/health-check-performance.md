@@ -51,7 +51,7 @@ The [MSBuild Build Coordinator](https://github.com/dotnet/msbuild/blob/main/docu
 
 This benchmark represents a deliberately high-contention workload. Its purpose is to demonstrate why all participating tools need a current SDK/MSBuild with the same coordination capabilities; ordinary single-build workloads should not expect the same ratios.
 
-Using a coordinator-capable SDK does not enable coordination by itself. The MSBuild Coordinator is optional and must be enabled, and every participating build must run through a compatible coordinated MSBuild path to share the system-wide budget. C# Doctor establishes a supported tooling foundation; it does not promise that every external build tool or command is participating in coordination.
+Using a coordinator-capable SDK does not enable coordination by itself. The MSBuild Coordinator is optional and must be enabled, and every participating build must run through a compatible coordinated MSBuild path to share the system-wide budget. The health check establishes a supported tooling foundation; it does not promise that every external build tool or command is participating in coordination.
 
 <a id="why-c-health-check-asks-users-to-update"></a>
 

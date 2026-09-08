@@ -8,7 +8,7 @@ Use this guide when a stage in C# Doctor reports **Failed** or **Needs attention
 - [Install and manage SDKs and runtimes](health-check-installation.md)
 - [Prepare for offline use](health-check-offline.md)
 
-To open it manually, run **C#: Check health** from the Command Palette in Visual Studio Code.
+To open C# Doctor, run **C#: Check health** from the Command Palette in Visual Studio Code.
 
 ## Tooling Requirements
 
@@ -58,7 +58,7 @@ Project evaluation can fail because of invalid MSBuild configuration, unavailabl
 
 ## Project Runtime Requirements
 
-C# Doctor derives runtime requirements from the evaluated target frameworks. See [Install project runtime requirements](health-check-installation.md#install-project-runtime-requirements) for automatic and manual installation options.
+The health check derives runtime requirements from the evaluated target frameworks. See [Install project runtime requirements](health-check-installation.md#install-project-runtime-requirements) for automatic and manual installation options.
 
 ## If the view appears stuck or stale
 

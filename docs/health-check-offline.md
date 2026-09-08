@@ -41,6 +41,6 @@ For repeatable enterprise provisioning, prefer an offline machine image or inter
 ## What works while offline
 
 - **Recheck** remains safe and does not attempt installation by itself.
-- An explicit installation action will fail if its download source is unreachable. C# Doctor reports the failure rather than silently switching installation systems.
+- An explicit installation action will fail if its download source is unreachable. The health check reports the failure rather than silently switching installation systems.
 - NuGet restore succeeds only when all required packages and metadata are available from local caches or configured offline sources.
 - Vulnerability and update information that depends on online services may be unavailable, but this does not replace the tooling, restore, project-detection, or runtime checks.

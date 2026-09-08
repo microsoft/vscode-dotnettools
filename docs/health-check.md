@@ -47,15 +47,15 @@ More .NET development capabilities are moving into the shared SDK and MSBuild la
 - **Faster up-to-date decisions.** Moving reliable up-to-date primitives into MSBuild can help tools skip projects that have not changed and do less work for incremental builds.
 - **Consistent improvements across entry points.** When VS Code, terminal commands, tests, and agents use the same current SDK, compatible features can behave consistently regardless of where a build starts.
 
-These capabilities will arrive incrementally and may require a supporting C# Dev Kit release, SDK release, or explicit feature enablement. C# Doctor keeps the tooling foundation current; it does not by itself enable every upcoming feature.
+These capabilities will arrive incrementally and may require a supporting C# Dev Kit release, SDK release, or explicit feature enablement. The health check keeps the tooling foundation current; it does not by itself enable every upcoming feature.
 
 This matters even more when command-line tools and AI agents run builds in parallel. If each tool selects a different SDK or performs the same project work independently, builds compete for CPU and memory and cannot reliably share improvements. A consistent, current tooling SDK is the foundation for making those operations coordinated and avoiding unnecessary work.
 
 The SDK used to run the tooling is separate from the frameworks your projects target. Moving the tooling to a newer supported SDK does **not** require every project to change its target framework. A current SDK can continue to build projects that target older supported .NET versions.
 
-C# Doctor exists to make that dependency visible and recoverable. Instead of allowing an incompatible SDK, missing runtime, or failed project evaluation to cause unrelated features to fail later, it shows the exact stage that needs attention and provides one next action.
+The health check makes that dependency visible and recoverable. Instead of allowing an incompatible SDK, missing runtime, or failed project evaluation to cause unrelated features to fail later, it shows the exact stage that needs attention and provides one next action.
 
-To open it manually, run **C#: Check health** from the Command Palette in Visual Studio Code.
+To open C# Doctor, run **C#: Check health** from the Command Palette in Visual Studio Code.
 
 ## What the stages mean
 
