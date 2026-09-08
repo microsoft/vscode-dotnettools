@@ -55,7 +55,7 @@ The SDK used to run the tooling is separate from the frameworks your projects ta
 
 The health check makes that dependency visible and recoverable. Instead of allowing an incompatible SDK, missing runtime, or failed project evaluation to cause unrelated features to fail later, it shows the exact stage that needs attention and provides one next action.
 
-To open C# Doctor, run **C#: Check health** from the Command Palette in Visual Studio Code.
+To open C# Doctor, run **C#: Check health with C# Doctor** from the Command Palette in Visual Studio Code.
 
 ## What the stages mean
 

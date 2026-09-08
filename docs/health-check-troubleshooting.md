@@ -8,7 +8,7 @@ Use this guide when a stage in C# Doctor reports **Failed** or **Needs attention
 - [Install and manage SDKs and runtimes](health-check-installation.md)
 - [Prepare for offline use](health-check-offline.md)
 
-To open C# Doctor, run **C#: Check health** from the Command Palette in Visual Studio Code.
+To open C# Doctor, run **C#: Check health with C# Doctor** from the Command Palette in Visual Studio Code.
 
 ## Tooling Requirements
 

@@ -83,7 +83,7 @@ You can change the C# Dev Kit tooling SDK generation at any time from the Comman
 
 The equivalent setting is `dotnet.useDotnet11Sdk`. Set it to `true` for .NET 11 or `false` for the default SDK generation. The command updates the user, workspace, or workspace-folder scope that currently controls the setting.
 
-Reload the VS Code window after switching so C# Dev Kit, MSBuild, restore, and other SDK-dependent features all start with the same selection. Then run **C#: Check health** to open C# Doctor and verify the result.
+Reload the VS Code window after switching so C# Dev Kit, MSBuild, restore, and other SDK-dependent features all start with the same selection. Then run **C#: Check health with C# Doctor** to open C# Doctor and verify the result.
 
 Switching back to the default SDK does not require uninstalling .NET 11. .NET SDK generations can be installed side by side, and C# Dev Kit selects the configured generation. Uninstall an SDK only if you also need to reclaim disk space or remove it from the machine; switching the C# Dev Kit setting is the safer way to change which generation the tooling uses.
 
