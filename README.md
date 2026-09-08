@@ -4,11 +4,11 @@ This repository is where we (Microsoft) gather and interact with the community a
 
 ## Documentation
 
-- [C# Health Check](docs/health-check.md)
-- [Why C# Health Check uses the current SDK](docs/health-check-performance.md)
+- [C# Doctor](docs/health-check.md)
+- [Why C# Doctor uses the current SDK](docs/health-check-performance.md)
 - [Install and manage SDKs and runtimes](docs/health-check-installation.md)
-- [Prepare C# Health Check for offline use](docs/health-check-offline.md)
-- [Troubleshoot failed C# Health Check stages](docs/health-check-troubleshooting.md)
+- [Prepare C# Doctor for offline use](docs/health-check-offline.md)
+- [Troubleshoot failed C# Doctor stages](docs/health-check-troubleshooting.md)
 
 ## Contributing
 

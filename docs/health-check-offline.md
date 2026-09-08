@@ -1,8 +1,10 @@
-# Prepare C# Health Check for offline use
+<a id="prepare-c-health-check-for-offline-use"></a>
 
-C# Health Check can diagnose and use compatible components that are already installed while the machine is offline. It cannot download an SDK, runtime, workload, or NuGet package without access to the corresponding source. Prepare the machine before disconnecting, or provision the same components through your organization's offline image and package mirrors.
+# Prepare C# Doctor for offline use
 
-- [C# Health Check overview](health-check.md)
+C# Doctor can diagnose and use compatible components that are already installed while the machine is offline. It cannot download an SDK, runtime, workload, or NuGet package without access to the corresponding source. Prepare the machine before disconnecting, or provision the same components through your organization's offline image and package mirrors.
+
+- [C# Doctor overview](health-check.md)
 - [Install and manage SDKs and runtimes](health-check-installation.md)
 - [Troubleshoot failed stages](health-check-troubleshooting.md)
 
@@ -39,6 +41,6 @@ For repeatable enterprise provisioning, prefer an offline machine image or inter
 ## What works while offline
 
 - **Recheck** remains safe and does not attempt installation by itself.
-- An explicit installation action will fail if its download source is unreachable. C# Health Check reports the failure rather than silently switching installation systems.
+- An explicit installation action will fail if its download source is unreachable. C# Doctor reports the failure rather than silently switching installation systems.
 - NuGet restore succeeds only when all required packages and metadata are available from local caches or configured offline sources.
 - Vulnerability and update information that depends on online services may be unavailable, but this does not replace the tooling, restore, project-detection, or runtime checks.

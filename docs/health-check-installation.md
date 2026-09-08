@@ -1,14 +1,16 @@
-# Install and manage .NET for C# Health Check
+<a id="install-and-manage-net-for-c-health-check"></a>
 
-This guide explains how C# Dev Kit selects and installs the tooling SDK and the project runtimes shown in C# Health Check.
+# Install and manage .NET for C# Doctor
 
-- [C# Health Check overview](health-check.md)
+This guide explains how C# Dev Kit selects and installs the tooling SDK and the project runtimes shown in C# Doctor.
+
+- [C# Doctor overview](health-check.md)
 - [Prepare for offline use](health-check-offline.md)
 - [Troubleshoot failed stages](health-check-troubleshooting.md)
 
 ## Installation requires your consent
 
-Opening, refreshing, restoring, or rechecking C# Health Check does not install software. Installation starts only after you select an explicit action such as **Install .NET SDK** or **Install missing .NET runtimes**.
+Opening, refreshing, restoring, or rechecking C# Doctor does not install software. Installation starts only after you select an explicit action such as **Install .NET SDK** or **Install missing .NET runtimes**.
 
 **Recheck** refreshes the diagnosis after you change an SDK, runtime, setting, or `global.json`. It does not install anything.
 
@@ -16,11 +18,11 @@ Opening, refreshing, restoring, or rechecking C# Health Check does not install s
 
 Installation ownership depends on the operating system:
 
-- **Windows:** C# Dev Kit uses the .NET Install Tool to request a standard, system-wide .NET installation. This is the installation model supported by Visual Studio and is eligible for normal .NET servicing through Microsoft Update when that servicing is enabled. It may request elevation. Normal SDK and Visual Studio version-compatibility rules still apply. If automatic project-runtime installation is unavailable, C# Health Check provides the official download page for each missing runtime version.
+- **Windows:** C# Dev Kit uses the .NET Install Tool to request a standard, system-wide .NET installation. This is the installation model supported by Visual Studio and is eligible for normal .NET servicing through Microsoft Update when that servicing is enabled. It may request elevation. Normal SDK and Visual Studio version-compatibility rules still apply. If automatic project-runtime installation is unavailable, C# Doctor provides the official download page for each missing runtime version.
 - **macOS and Linux:** C# Dev Kit uses `dotnetup` to manage .NET in a per-user location shared by your workspaces. This avoids requiring administrator access and gives C# Dev Kit a consistent SDK and runtime location on platforms without the Windows/Visual Studio system-install servicing model.
 - **User-controlled .NET installations:** C# Dev Kit does not modify an installation selected through an explicit SDK path or another user-controlled location.
 
-This split is intentional. The recommended Windows path remains compatible with standard Windows and Visual Studio installation and update mechanisms. On macOS and Linux, `dotnetup` provides the user-local acquisition and update path. In both cases, C# Health Check verifies the selected SDK and runtimes after installation.
+This split is intentional. The recommended Windows path remains compatible with standard Windows and Visual Studio installation and update mechanisms. On macOS and Linux, `dotnetup` provides the user-local acquisition and update path. In both cases, C# Doctor verifies the selected SDK and runtimes after installation.
 
 ## Use `dotnetup` as a user-managed Windows alternative
 
@@ -33,13 +35,13 @@ Adopting `dotnetup` for your general environment has broader effects than changi
 - Visual Studio acquires and services .NET through the Visual Studio Installer and remains more tightly coupled to particular SDKs. A `dotnetup` installation does not replace Visual Studio servicing, and not every Visual Studio operation is guaranteed to select the same user-local SDK. Verify important build, test, and publish workflows in both Visual Studio and VS Code.
 - User-local SDK management does not install or service machine components such as Visual Studio workloads, the ASP.NET Core Hosting Bundle, or other globally installed runtime components.
 
-After configuring `dotnetup`, open a new terminal and run `dotnet --info` to confirm which host and SDK are selected. Then run `dotnet restore` and `dotnet build` for the workspace before rechecking C# Health Check.
+After configuring `dotnetup`, open a new terminal and run `dotnet --info` to confirm which host and SDK are selected. Then run `dotnet restore` and `dotnet build` for the workspace before rechecking C# Doctor.
 
 If you only want to switch C# Dev Kit between its default and .NET 11 SDK generations, use the C# commands described below instead. That changes C# Dev Kit's selection without adopting a user-managed .NET installation as the default for other tools.
 
 ## Install a missing tooling SDK
 
-Use the action in C# Health Check to install the supported SDK, or install it manually from [Download .NET](https://dotnet.microsoft.com/download).
+Use the action in C# Doctor to install the supported SDK, or install it manually from [Download .NET](https://dotnet.microsoft.com/download).
 
 After installation, select **Recheck**. If the view asks you to reload, use **Reload Window** so all extension processes use the same SDK selection.
 
@@ -47,7 +49,7 @@ After installation, select **Recheck**. If the view asks you to reload, use **Re
 
 The nearest `global.json` governing the first workspace folder controls .NET SDK selection. Its `sdk.version`, `rollForward`, `allowPrerelease`, and `paths` settings can prevent an installed SDK from being selected.
 
-Use the proposed C# Health Check action when it matches your repository's SDK policy. C# Dev Kit creates a backup before applying a proposed edit. For manual changes, see [.NET SDK selection with global.json](https://learn.microsoft.com/dotnet/core/tools/global-json).
+Use the proposed C# Doctor action when it matches your repository's SDK policy. C# Dev Kit creates a backup before applying a proposed edit. For manual changes, see [.NET SDK selection with global.json](https://learn.microsoft.com/dotnet/core/tools/global-json).
 
 Common causes include:
 
@@ -64,7 +66,7 @@ If the workspace targets .NET 11, use **Use .NET 11 SDK** when offered. This cha
 
 ## How the default SDK generation advances
 
-C# Health Check follows the supported stable .NET generation while keeping the next preview generation behind an explicit, generation-specific opt-in:
+C# Doctor follows the supported stable .NET generation while keeping the next preview generation behind an explicit, generation-specific opt-in:
 
 - C# Dev Kit v10.* uses the supported .NET 10 SDK by default and offers an explicit .NET 11 Preview opt-in.
 - When .NET 11 becomes stable, C# Dev Kit v11.* will require the supported .NET 11 SDK as the default tooling generation.
@@ -81,7 +83,7 @@ You can change the C# Dev Kit tooling SDK generation at any time from the Comman
 
 The equivalent setting is `dotnet.useDotnet11Sdk`. Set it to `true` for .NET 11 or `false` for the default SDK generation. The command updates the user, workspace, or workspace-folder scope that currently controls the setting.
 
-Reload the VS Code window after switching so C# Dev Kit, MSBuild, restore, and other SDK-dependent features all start with the same selection. Then run **C#: Check Health** to verify it.
+Reload the VS Code window after switching so C# Dev Kit, MSBuild, restore, and other SDK-dependent features all start with the same selection. Then run **C#: Check health** to verify it.
 
 Switching back to the default SDK does not require uninstalling .NET 11. .NET SDK generations can be installed side by side, and C# Dev Kit selects the configured generation. Uninstall an SDK only if you also need to reclaim disk space or remove it from the machine; switching the C# Dev Kit setting is the safer way to change which generation the tooling uses.
 
@@ -95,7 +97,7 @@ If the override is no longer needed, use **Use default .NET SDK** when offered. 
 
 ## Install project runtime requirements
 
-The SDK builds projects, while project runtimes are needed to run, debug, or test them. C# Health Check derives the required runtime bands from each project's evaluated target framework. It uses evaluated project data so imported, computed, conditional, and multi-targeted frameworks are represented correctly rather than installing from unevaluated project-file text.
+The SDK builds projects, while project runtimes are needed to run, debug, or test them. C# Doctor derives the required runtime bands from each project's evaluated target framework. It uses evaluated project data so imported, computed, conditional, and multi-targeted frameworks are represented correctly rather than installing from unevaluated project-file text.
 
 When a runtime is missing:
 
