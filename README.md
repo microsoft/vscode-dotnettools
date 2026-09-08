@@ -5,7 +5,7 @@ This repository is where we (Microsoft) gather and interact with the community a
 ## Documentation
 
 - [C# Doctor](docs/health-check.md)
-- [Why C# Doctor uses the current SDK](docs/health-check-performance.md)
+- [Why C# Dev Kit benefits from the current .NET SDK](docs/health-check-performance.md)
 - [Install and manage SDKs and runtimes](docs/health-check-installation.md)
 - [Prepare C# Doctor for offline use](docs/health-check-offline.md)
 - [Troubleshoot C# Doctor stages](docs/health-check-troubleshooting.md)
