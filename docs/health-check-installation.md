@@ -7,8 +7,7 @@ C# Doctor checks the .NET SDK used by C# Dev Kit and the runtimes needed by your
 | Operating system | Installation guide |
 |---|---|
 | Windows | [Install .NET on Windows](health-check-installation-windows.md) |
-| macOS | [Install .NET on macOS](health-check-installation-macos.md) |
-| Linux | [Install .NET on Linux](health-check-installation-linux.md) |
+| macOS or Linux | [Install .NET on macOS and Linux](health-check-installation-macos-linux.md) |
 
 - [C# Doctor overview](health-check.md)
 - [Prepare for offline use](health-check-offline.md)
@@ -32,6 +31,6 @@ C# Dev Kit uses one configured tooling SDK generation across the workspace. **C#
 
 1. Select **Recheck** in C# Doctor.
 2. If C# Doctor asks you to reload, use **Reload Window**.
-3. If the result is still blocked, follow the verification steps in your [Windows](health-check-installation-windows.md), [macOS](health-check-installation-macos.md), or [Linux](health-check-installation-linux.md) guide.
+3. If the result is still blocked, follow the verification steps in the [Windows](health-check-installation-windows.md) or [macOS and Linux](health-check-installation-macos-linux.md) guide.
 
 To open C# Doctor, run **C#: Check health with C# Doctor** from the Command Palette in Visual Studio Code.

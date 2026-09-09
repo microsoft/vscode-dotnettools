@@ -1,4 +1,4 @@
-# Install .NET with C# Doctor on Linux
+# Install .NET with C# Doctor on macOS and Linux
 
 C# Doctor checks the SDK and runtimes that C# Dev Kit needs and manages them in a shared per-user `dotnetup` installation without elevation.
 
@@ -11,7 +11,7 @@ C# Doctor checks the SDK and runtimes that C# Dev Kit needs and manages them in 
 
 [Review the shared SDK, runtime, and consent rules](health-check-installation.md).
 
-C# Doctor uses the exact shared per-user .NET location resolved by its provider rather than guessing a location from `PATH`. That installation is shared by your C# Dev Kit workspaces and is updated through `dotnetup`. An explicit user-controlled SDK path is reported but not modified.
+C# Doctor uses the exact shared per-user .NET location resolved by its provider rather than guessing a location from your shell. That installation is shared by your C# Dev Kit workspaces and is updated through `dotnetup`. An explicit user-controlled SDK path is reported but not modified.
 
 ## Repair a missing tooling SDK or runtime
 
@@ -19,7 +19,7 @@ C# Doctor uses the exact shared per-user .NET location resolved by its provider 
 
 **Fix it:** Select the SDK installation action shown in C# Doctor; no administrator access is required.
 
-**Verify:** Select **Recheck**, then run `dotnet --info` in a new shell and confirm it selects the expected installation.
+**Verify:** Select **Recheck**, then run `dotnet --info` in a new terminal and confirm your shell selects the expected installation.
 
 **Still blocked?** See [Tooling Requirements troubleshooting](health-check-troubleshooting.md#tooling-requirements).
 
@@ -47,9 +47,9 @@ C# Doctor uses the exact shared per-user .NET location resolved by its provider 
 
 **We require:** A new shell must be able to find the intended `dotnet` host and the same SDK generation.
 
-**Fix it:** Open a new shell, inspect `command -v dotnet` and `dotnet --info`, and correct your shell startup files if another installation wins `PATH`.
+**Fix it:** Open a new shell, inspect `which dotnet` and `dotnet --info`, and correct your shell startup files if another installation wins `PATH`.
 
-**Verify:** Restart VS Code from the corrected environment, select **Recheck**, and reload if requested.
+**Verify:** Restart VS Code from the corrected shell environment, select **Recheck**, and reload if requested.
 
 **Still blocked?** See [stale-result troubleshooting](health-check-troubleshooting.md#if-the-view-appears-stuck-or-stale).
 
