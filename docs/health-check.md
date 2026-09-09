@@ -71,6 +71,6 @@ A red **Failed** state blocks a later stage. An amber **Needs attention** state 
 ## Choose the guide for your task
 
 - [Why the current SDK matters](health-check-performance.md) — measured Aspire time-to-IntelliSense and memory results, Fast Build improvements, and concurrent-build coordination results.
-- [Install and manage SDKs and runtimes](health-check-installation.md) — platform installation ownership, Windows system servicing, `dotnetup`, SDK-generation switching, `global.json`, explicit SDK paths, and project runtimes.
+- [Install and manage SDKs and runtimes](health-check-installation.md) — choose Windows, macOS, or Linux installation steps, then recover SDK, `global.json`, and runtime problems.
 - [Prepare for offline use](health-check-offline.md) — pre-provision SDKs, runtimes, packages, workloads, and extensions before disconnecting.
 - [Troubleshoot failed stages](health-check-troubleshooting.md) — validate restore/build behavior, diagnose project detection, recover stale state, collect logs, and report an issue.

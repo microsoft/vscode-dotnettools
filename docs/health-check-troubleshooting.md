@@ -12,7 +12,7 @@ To open C# Doctor, run **C#: Check health with C# Doctor** from the Command Pale
 
 ## Tooling Requirements
 
-For a missing SDK, incompatible `global.json`, SDK-generation selection, explicit SDK override, or missing tooling runtime, see [Install and manage .NET with C# Doctor](health-check-installation.md).
+For a missing SDK, incompatible `global.json`, SDK-generation selection, explicit SDK override, or missing tooling runtime, choose the [Windows](health-check-installation-windows.md), [macOS](health-check-installation-macos.md), or [Linux](health-check-installation-linux.md) installation steps.
 
 ## Restore NuGet Packages
 
@@ -58,7 +58,7 @@ Project evaluation can fail because of invalid MSBuild configuration, unavailabl
 
 ## Project Runtime Requirements
 
-The health check derives runtime requirements from the evaluated target frameworks. See [Install project runtime requirements](health-check-installation.md#install-project-runtime-requirements) for automatic and manual installation options.
+The health check derives runtime requirements from the evaluated target frameworks. Choose the runtime installation steps for [Windows](health-check-installation-windows.md#install-missing-project-runtimes), [macOS](health-check-installation-macos.md#install-missing-project-runtimes), or [Linux](health-check-installation-linux.md#install-missing-project-runtimes).
 
 ## If the view appears stuck or stale
 

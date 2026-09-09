@@ -8,6 +8,8 @@ C# Doctor can diagnose an offline workspace by using compatible components that 
 - [Install and manage SDKs and runtimes](health-check-installation.md)
 - [Troubleshoot failed stages](health-check-troubleshooting.md)
 
+Before disconnecting, use the [Windows](health-check-installation-windows.md), [macOS](health-check-installation-macos.md), or [Linux](health-check-installation-linux.md) guide to install every reported requirement. Installation actions cannot download anything while offline.
+
 ## Offline prerequisites
 
 An offline workspace needs:
