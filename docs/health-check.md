@@ -7,7 +7,9 @@ C# Dev Kit checks that the .NET tooling and project runtimes required by your wo
 C# Dev Kit needs two different parts of .NET to be current and complete:
 
 1. **The latest SDK generation supported by C# Dev Kit** runs the tooling, restore, project evaluation, and builds. This gives the entire toolchain the performance, reliability, coordination, and caching improvements delivered in the current SDK and MSBuild.
-2. **The runtime bands required by your projects' evaluated target frameworks (TFMs)** run, debug, and test the applications. Install the .NET and ASP.NET Core runtime bands identified by C# Health Check.
+2. **The runtime families and bands required by your projects' evaluated data** run, debug, and test the applications. Install the exact requirements identified by C# Doctor.
+
+C# Doctor derives those requirements from the evaluated projects. Modern .NET projects require `Microsoft.NETCore.App`; ASP.NET and Web projects additionally require `Microsoft.AspNetCore.App`; and WPF and Windows Forms projects require `Microsoft.WindowsDesktop.App` on Windows. A mixed workspace requires the union of the families and bands required by its projects.
 
 The tooling SDK and project target frameworks do not have to be the same generation. For example, a project targeting `net8.0` can be built with a newer supported tooling SDK while still requiring the .NET 8 runtime to run, debug, or test. A multi-targeted workspace may need several runtime bands installed side by side.
 
@@ -60,9 +62,9 @@ To open it manually, run **C#: Check Health** from the Command Palette in Visual
 | **Tooling Requirements** | A supported .NET SDK can be selected and is compatible with the workspace's `global.json`. |
 | **Restore NuGet Packages** | NuGet restore completed sufficiently for project evaluation. |
 | **Detect Project Configuration** | C# Dev Kit evaluated the projects and identified their target frameworks. |
-| **Project Runtime Requirements** | The .NET and ASP.NET Core runtimes needed to run, debug, or test the evaluated projects are available. |
+| **Project Runtime Requirements** | The exact runtime families and bands needed to run, debug, or test the evaluated projects are available. |
 
-A red **Failed** state blocks a later stage. An amber **Needs attention** state means C# Dev Kit has usable project information, but part of the workspace is degraded or a project runtime is missing.
+A red **Failed** state blocks a later stage. An amber **Needs attention** state means C# Dev Kit has usable project information, but part of the workspace is degraded or a required runtime family or band is missing.
 
 ## Choose the guide for your task
 
