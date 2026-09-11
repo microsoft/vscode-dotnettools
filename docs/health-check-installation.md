@@ -31,6 +31,8 @@ C# Dev Kit does not modify an installation selected through `dotnet.projectSdkPa
 - **Project runtimes:** Projects also need the .NET and ASP.NET Core runtime bands identified from their evaluated target frameworks to run, debug, or test. These can differ from the tooling SDK generation.
 - **SDK policy:** The nearest `global.json` that governs the first workspace folder must allow the tooling SDK to be selected. Its `version`, `rollForward`, `allowPrerelease`, and `paths` settings all affect selection.
 
+<a id="use-dotnetup-as-a-user-managed-windows-alternative"></a>
+
 For manual recovery, use [Download .NET](https://dotnet.microsoft.com/download), review [.NET SDK selection with global.json](https://learn.microsoft.com/dotnet/core/tools/global-json), or consult the [`dotnetup` documentation](https://github.com/dotnet/sdk/tree/release/dnup/documentation/general/dotnetup) when that tool owns your installation.
 
 <a id="use-the-net-11-sdk-generation"></a>
