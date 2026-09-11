@@ -6,18 +6,16 @@ C# Doctor is C# Dev Kit's health-check view. It checks that the .NET tooling and
 
 ## The happy path
 
-C# Dev Kit needs two different parts of .NET to be current and complete:
+C# Dev Kit needs two different parts of .NET to be compatible and complete:
 
-1. **The latest SDK generation supported by C# Dev Kit** runs the tooling, restore, project evaluation, and builds. This gives the entire toolchain the performance, reliability, coordination, and caching improvements delivered in the current SDK and MSBuild.
+1. **A supported SDK selected by the .NET CLI for the workspace** runs the tooling, restore, project evaluation, and builds. The selected SDK must satisfy C# Dev Kit's tooling requirements and the repository's SDK policy.
 2. **The runtime bands required by your projects' evaluated target frameworks (TFMs)** run, debug, and test the applications. Install the .NET and ASP.NET Core runtime bands identified by C# Doctor.
 
-The tooling SDK and project target frameworks do not have to be the same generation. For example, a project targeting `net8.0` can be built with a newer supported tooling SDK while still requiring the .NET 8 runtime to run, debug, or test. A multi-targeted workspace may need several runtime bands installed side by side.
-
-The supported tooling generation advances with C# Dev Kit's public major version. C# Dev Kit v10.* uses the supported .NET 10 SDK by default while .NET 11 Preview is an explicit opt-in. When .NET 11 becomes stable, C# Dev Kit v11.* will require the supported .NET 11 SDK by default. It will introduce a new .NET 12-specific opt-in flag and command for trying .NET 12 Preview; an earlier preview preference will not silently move users to the next preview generation.
+The tooling SDK and project target frameworks do not have to be the same generation. For example, a project targeting `net8.0` can be built with a newer compatible SDK while still requiring the .NET 8 runtime to run, debug, or test. A multi-targeted workspace may need several runtime bands installed side by side.
 
 For the normal setup:
 
-1. Use the SDK generation recommended by C# Doctor.
+1. From the workspace, run `dotnet --info` and confirm that the selected SDK meets the repository and C# Dev Kit requirements.
 2. Make sure the repository's `global.json`, if present, allows that SDK to be selected.
 3. Restore and build the workspace successfully.
 4. Install the runtime bands reported for the evaluated project TFMs.
@@ -27,9 +25,9 @@ For the normal setup:
 
 ## Why C# Doctor validates your workspace
 
-C# Dev Kit relies on capabilities delivered in the .NET SDK and MSBuild—not only on code contained in the extension. Using the latest SDK generation supported by C# Dev Kit gives the tooling access to project-system, build-coordination, caching, and evaluation improvements that make large workspaces and repeated builds more responsive and use fewer machine resources.
+C# Dev Kit relies on capabilities delivered in the .NET SDK and MSBuild—not only on code contained in the extension. Using a current, compatible SDK gives the tooling access to project-system, build-coordination, caching, and evaluation improvements that can make large workspaces and repeated builds more responsive and use fewer machine resources.
 
-Why the latest supported SDK, rather than simply any installed SDK? These improvements ship in the SDK and MSBuild. Selecting the same older SDK everywhere may make behavior consistent, but it cannot provide capabilities that were not included in that SDK. Staying current is how C# Dev Kit can keep delivering performance and reliability improvements across the .NET toolchain.
+These improvements ship in the SDK and MSBuild. An older SDK cannot provide capabilities that were not included in that release, so keeping the workspace on a current supported SDK helps C# Dev Kit deliver performance and reliability improvements across the .NET toolchain.
 
 See [measured examples from Aspire, Fast Build, and concurrent MSBuild workloads](health-check-performance.md) for the kinds of time-to-IntelliSense, memory, and incremental-build improvements available across the current C# Dev Kit and .NET toolchain. These are complementary improvements; changing SDK versions alone does not produce every measured result.
 
@@ -66,7 +64,7 @@ To open C# Doctor, run **C#: Check health with C# Doctor** from the Command Pale
 | **Detect Project Configuration** | C# Dev Kit evaluated the projects and identified their target frameworks. |
 | **Project Runtime Requirements** | The .NET and ASP.NET Core runtimes needed to run, debug, or test the evaluated projects are available. |
 
-A red **Failed** state blocks a later stage. An amber **Needs attention** state means C# Dev Kit has usable project information, but part of the workspace is degraded or a project runtime is missing.
+A red **Failed** state blocks that requirement and may block a later stage. An amber **Needs attention** state means C# Dev Kit has usable project information, but part of the workspace is degraded. Missing required project runtimes block runtime readiness until all reported .NET and ASP.NET Core runtime bands are installed.
 
 ## Choose the guide for your task
 

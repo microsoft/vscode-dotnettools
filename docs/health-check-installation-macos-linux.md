@@ -1,23 +1,23 @@
 # Install .NET with C# Doctor on macOS and Linux
 
-C# Doctor checks the SDK and runtimes that C# Dev Kit needs and manages them in a shared per-user `dotnetup` installation without elevation.
+C# Doctor checks the SDK and runtimes that C# Dev Kit needs. It can install required components into a managed per-user installation without elevation, or guide you when the workspace uses an installation managed by another tool.
 
 ## Do this
 
 1. Run **C#: Check health with C# Doctor**.
 2. Select the installation or repair action shown for the blocked requirement.
-3. Let C# Doctor refresh the official `dotnetup` installer and complete the required acquisition.
+3. Let C# Doctor complete the managed installation, or follow the manual recovery guidance for your selected .NET host.
 4. Select **Recheck**. Use **Reload Window** if C# Doctor requests it.
 
 [Review the shared SDK, runtime, and consent rules](health-check-installation.md).
 
-C# Doctor uses the exact shared per-user .NET location resolved by its provider rather than guessing a location from your shell. That installation is shared by your C# Dev Kit workspaces and is updated through `dotnetup`. An explicit user-controlled SDK path is reported but not modified.
+C# Doctor uses a compatible .NET host selected by the CLI for the workspace. It modifies an installation only when it is authorized to manage that installation. If a package manager, version manager, explicit path, or other user-controlled installation selects `dotnet`, repair it with its owning tool, select a compatible installation, or clear an invalid explicit path override.
 
 ## Repair a missing tooling SDK or runtime
 
-**We require:** A supported tooling SDK and its .NET and ASP.NET Core runtimes must be available in the shared per-user installation.
+**We require:** The SDK selected by the .NET CLI for the workspace must satisfy the workspace and tooling requirements, and its required .NET and ASP.NET Core runtimes must be available.
 
-**Fix it:** Select the SDK installation action shown in C# Doctor; no administrator access is required.
+**Fix it:** Select the installation action shown in C# Doctor when it can manage the selected installation; no administrator access is required for its per-user installation. Otherwise repair the user-controlled installation with its owning tool or correct the workspace's .NET selection.
 
 **Verify:** Select **Recheck**, then run `dotnet --info` in a new terminal and confirm your shell selects the expected installation.
 
@@ -45,7 +45,7 @@ C# Doctor uses the exact shared per-user .NET location resolved by its provider 
 
 ## Fix shell and `PATH` selection
 
-**We require:** A new shell must be able to find the intended `dotnet` host and the same SDK generation.
+**We require:** A new shell must be able to find the intended `dotnet` host and select a compatible SDK from the workspace.
 
 **Fix it:** Open a new shell, inspect `which dotnet` and `dotnet --info`, and correct your shell startup files if another installation wins `PATH`.
 

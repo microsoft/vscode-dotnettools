@@ -11,23 +11,22 @@ C# Doctor checks the SDK and runtimes that C# Dev Kit needs, then offers a recov
 
 [Review the shared SDK, runtime, and consent rules](health-check-installation.md).
 
-## Know which installation C# Doctor will update
+## Know which installation C# Doctor can update
 
-The system-wide installation is the default. Only an existing valid `dotnetup` installation that meets the condition below changes where C# Doctor repairs .NET.
+C# Doctor uses a compatible .NET host selected by the CLI for the workspace. It modifies an installation only when it is authorized to manage that installation.
 
 | What C# Doctor finds | What happens |
 |---|---|
-| No usable user-managed installation | The .NET Install Tool requests the default system-wide installation. It can require elevation and is eligible for .NET servicing through Microsoft Update when that servicing is enabled. |
-| A valid, current-architecture `dotnetup` `everywhere` hive that wins `PATH` | C# Doctor reuses that installation for repairs. You keep it updated with `dotnetup`; C# Dev Kit does not install or configure `dotnetup` for you. |
-| An explicit user-controlled SDK path | C# Doctor reports the problem but does not modify that installation. |
+| C# Doctor can manage the selected installation | The offered repair installs the required components. A system-wide installation can require elevation and is eligible for .NET servicing through Microsoft Update when that servicing is enabled. |
+| A package manager, version manager, explicit path, or other user-controlled installation selects `dotnet` | C# Doctor reports the requirement without silently changing or bypassing that installation. Repair it with its owning tool, select a compatible installation, or clear an invalid explicit path override. |
 
 Visual Studio acquires and services .NET through the Visual Studio Installer. Repairing .NET for C# Dev Kit does not replace Visual Studio servicing.
 
 ## Repair a missing tooling SDK or runtime
 
-**We require:** A supported tooling SDK and its .NET and ASP.NET Core runtimes must be available through the installation selected above.
+**We require:** The SDK selected by the .NET CLI for the workspace must satisfy the workspace and tooling requirements, and its required .NET and ASP.NET Core runtimes must be available.
 
-**Fix it:** Select the SDK installation action shown in C# Doctor and approve elevation if Windows requests it.
+**Fix it:** Select the installation action shown in C# Doctor when it can manage the selected installation, and approve elevation if Windows requests it. Otherwise repair the user-controlled installation with its owning tool or correct the workspace's .NET selection.
 
 **Verify:** Select **Recheck**, then run `dotnet --info` in a new terminal if the result remains blocked.
 

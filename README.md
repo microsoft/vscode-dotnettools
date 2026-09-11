@@ -12,8 +12,6 @@ This repository is where we (Microsoft) gather and interact with the community a
 
 ## Contributing
 
-Maintainers with access to the `vs-green` source of truth should audit the stable `docs/health-check.md` path and related guides whenever the C# Doctor name, command, actions, states, setup, troubleshooting, or screenshots change. Update these docs in a draft pull request, cross-link it with the corresponding `vs-green` pull request, and preserve existing documentation paths, anchors, and aliases.
-
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.

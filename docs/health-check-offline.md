@@ -14,7 +14,7 @@ Before disconnecting, use the [Windows](health-check-installation-windows.md) or
 
 An offline workspace needs:
 
-1. **A supported tooling SDK.** Install the SDK generation selected by C# Dev Kit. The installed feature band must meet the minimum required by that C# Dev Kit release.
+1. **A supported tooling SDK.** Run `dotnet --info` from the workspace and ensure the selected SDK meets C# Dev Kit's tooling requirements and the repository's SDK policy.
 2. **Tooling runtimes.** Ensure the selected .NET installation contains both the .NET runtime and ASP.NET Core runtime for the tooling generation.
 3. **Project runtimes.** Install the .NET and ASP.NET Core runtime bands required by the projects' evaluated target frameworks. Projects targeting different modern .NET major versions may require multiple runtime bands side by side. Building alone does not prove the runtimes needed to run, debug, or test are installed.
 4. **NuGet packages.** Populate the user's global packages folder or configure reachable offline package sources with every package needed by the workspace. Include authenticated-source credentials through your organization's approved mechanism; do not place credentials in the repository.

@@ -1,6 +1,6 @@
 # Why C# Dev Kit benefits from the current .NET SDK
 
-C# Dev Kit relies on capabilities delivered in the .NET SDK and MSBuild—not only on code contained in the extension. Staying on the latest SDK generation supported by C# Dev Kit lets the tooling use new build coordination, caching, project-evaluation, and incremental-build capabilities as they become available.
+C# Dev Kit relies on capabilities delivered in the .NET SDK and MSBuild—not only on code contained in the extension. Using a current, compatible SDK lets the tooling use new build coordination, caching, project-evaluation, and incremental-build capabilities as they become available.
 
 - [C# Doctor overview](health-check.md)
 - [Install and manage SDKs and runtimes](health-check-installation.md)
@@ -55,7 +55,7 @@ Using a coordinator-capable SDK does not enable coordination by itself. The MSBu
 
 <a id="why-c-health-check-asks-users-to-update"></a>
 
-## Why C# Doctor recommends updating the SDK
+## Why C# Doctor may recommend updating the SDK
 
 The newer C# Dev Kit architecture removes duplicated work from the extension, while newer SDK and MSBuild releases provide capabilities that can benefit the editor, command-line builds, tests, agents, and other .NET tools. Using the same current tooling SDK helps those components:
 
