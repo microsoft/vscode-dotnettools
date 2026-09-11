@@ -89,9 +89,10 @@ The column headers can be "Phase", "Event", "Category", or similar -- adapt to w
 | **PLANNING** | 03-30 | 04-01 |
 | **MAR STABLE RELEASE** | 04-01 | |
 | **APR PRE-RELEASE 1** | 04-01 | |
-| **DEV** | 04-02 | 04-21 |
-| **CODE FREEZE** | 04-22 | |
-| **ENDGAME** | 04-23 | 05-01 |
+| **DEV** | 04-02 | 04-23 |
+| **CODE FREEZE** | 04-24 | |
+| **C#DK/C# SNAP** | 04-24 | |
+| **ENDGAME** | 04-27 | 05-01 |
 | **APR STABLE RELEASE** | 05-06 | |
 ```
 
@@ -198,6 +199,15 @@ Tags go inside a `.tags` container within the calendar cell:
 
 - If a cell has BOTH a band AND tags (e.g., Planning ends on the same day as a Stable Release), the `.tags` container uses `margin-top: 32px` (default) to sit below the band.
 - If a cell has tags but NO band (e.g., Code Freeze day), use `style="margin-top:0"` on the `.tags` container.
+- Preserve source order when multiple tags share a date; the first event must render above subsequent events.
+
+### C# iteration convention
+
+For the C# in VS Code iteration calendar, Code Freeze is a single milestone, not a weekly recurring event. When it shares a date with C#DK/C# SNAP, render Code Freeze immediately above SNAP.
+
+CTI Testing recurs on Sundays and Fridays. C#DK/C# SNAP recurs on Thursdays.
+
+When a pre-release coincides with a stable release, reset the pre-release sequence to 1 on that date and increment subsequent pre-releases from there.
 
 ### Tag text
 
@@ -508,10 +518,10 @@ Wrap in the standard Canvas HTML structure with the full CSS, sticky top bar, an
 **Tag-only day (no band):**
 ```html
 <div class="cal-day">
-  <div class="day-number">22</div>
+  <div class="day-number">24</div>
   <div class="tags" style="margin-top:0">
     <div class="tag tag-freeze">Code Freeze</div>
-    <div class="tag tag-prerelease">Apr Pre-release 4 (RC)</div>
+    <div class="tag tag-snap">C#DK/C# SNAP</div>
   </div>
 </div>
 ```
@@ -579,9 +589,9 @@ Infer the cascade rules from the user's existing schedule. Look at month 1 to de
 - What's the ordering and gap between phases?
 - Do any events share a day (e.g., Stable Release + next Pre-release 1)?
 
-Then apply those same patterns when cascading. For example, if you observe that Code Freeze always lands on Wednesday and Endgame always starts the next Thursday, preserve that when shifting dates.
+Then apply those same patterns when cascading. For example, if you observe that Code Freeze always lands on Friday and Endgame always starts the next Monday, preserve that when shifting dates.
 
-Do NOT hardcode any specific day-of-week or phase length. Always derive the pattern from the schedule you were given.
+Do NOT hardcode any specific day-of-week or phase length unless a schedule-specific convention is documented above. Otherwise, always derive the pattern from the schedule you were given.
 
 After making changes, update the HTML calendar and refresh the browser. For the source markdown file, follow the user's preference (see below).
 
