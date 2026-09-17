@@ -55,6 +55,16 @@ The health check makes that dependency visible and recoverable. Instead of allow
 
 To open C# Doctor, run **C#: Check health with C# Doctor** from the Command Palette in Visual Studio Code.
 
+## When C# Doctor opens
+
+C# Doctor may open automatically once during initial workspace setup if it finds a problem that needs attention. Healthy startup stays silent.
+
+After initial setup, edits to any file do not automatically open Doctor or take focus from the editor, including unfinished edits saved by Auto Save. Checks continue in the background, and an already-open Doctor view stays up to date.
+
+The C# Doctor status bar item uses the theme error color for blocked or failed requirements and warning color for conditions needing attention. Ready advisories and routine loading remain uncolored. The project-status item continues showing project information without severity coloring.
+
+To investigate, click the Doctor status bar item or run **C#: Check health with C# Doctor** from the Command Palette.
+
 ## What the stages mean
 
 | Stage | What C# Dev Kit checks |
