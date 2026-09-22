@@ -138,6 +138,8 @@
     .band-planning { background: #DBEAFE; color: #1E40AF; }
     .band-dev      { background: #D1FAE5; color: #065F46; }
     .band-endgame  { background: #FEE2E2; color: #991B1B; }
+    .band-secondary { top: 58px; }
+    .band-thanksgiving { background: #111827; color: #FFFFFF; top: 58px; }
     .band-dev-v1v2 {
       z-index: 4;
     }
@@ -165,6 +167,8 @@
     .tag-freeze      { background: #FEF3C7; color: #92400E; }
     .tag-release     { background: #7C3AED; color: #F5F3FF; white-space: normal; }
     .tag-prerelease  { background: #F3E8FF; color: #6B21A8; }
+    .tag-snapping    { background: #D1D5DB; color: #1F2937; }
+    .tag-cti         { background: #CFFAFE; color: #155E75; }
 
     /* Sticky legend at bottom */
     .legend {
@@ -202,6 +206,8 @@
     .sw-freeze     { background: #FEF3C7; }
     .sw-release    { background: #7C3AED; }
     .sw-prerelease { background: #F3E8FF; }
+    .sw-snapping   { background: #D1D5DB; }
+    .sw-cti        { background: #CFFAFE; }
   </style>
 </head>
 <body>
@@ -292,9 +298,6 @@
         </div>
         <div class="cal-day">
           <div class="day-number">20</div>
-          <div class="tags" style="margin-top:0">
-            <div class="tag tag-freeze">Code Freeze</div>
-          </div>
         </div>
         <div class="cal-day">
           <div class="day-number">21</div>
@@ -461,7 +464,6 @@
         <div class="cal-day">
           <div class="day-number">24</div>
           <div class="tags" style="margin-top:0">
-            <div class="tag tag-freeze">Code Freeze</div>
             <div class="tag tag-prerelease">May Pre-release 6 (RC)</div>
           </div>
         </div>
@@ -1130,7 +1132,6 @@
         <div class="cal-day">
           <div class="day-number">21</div>
           <div class="tags" style="margin-top:0">
-            <div class="tag tag-freeze">Code Freeze</div>
             <div class="tag tag-prerelease">Aug Pre-release 11 (RC) - V2</div>
           </div>
         </div>
@@ -1278,21 +1279,162 @@
 
 <script>
 (function() {
-  const now = new Date();
-  const y = now.getFullYear(), m = now.getMonth(), d = now.getDate();
-  document.querySelectorAll('.month-section').forEach(section => {
-    const heading = section.querySelector('.month-heading').textContent.trim();
-    const [monthName, yearStr] = heading.split(' ');
-    const monthIdx = new Date(monthName + ' 1, 2000').getMonth();
-    const sectionYear = parseInt(yearStr);
-    if (sectionYear !== y || monthIdx !== m) return;
-    section.querySelectorAll('.cal-day:not(.outside)').forEach(cell => {
-      const num = cell.querySelector('.day-number');
-      if (num && parseInt(num.textContent) === d) {
-        cell.classList.add('today');
+  const year = 2026;
+  const monthIndexes = [8, 9, 10, 11];
+  const events = new Map();
+  const phases = [
+    { start: '2026-09-14', end: '2026-09-16', label: 'Planning', className: 'planning' },
+    { start: '2026-09-17', end: '2026-10-22', label: 'DEV - V11', className: 'dev' },
+    { start: '2026-10-26', end: '2026-11-10', label: 'Endgame', className: 'endgame' },
+    { start: '2026-11-12', end: '2026-12-03', label: 'Dev', className: 'dev' },
+    { start: '2026-12-07', end: '2026-12-15', label: 'Endgame', className: 'endgame' }
+  ];
+  const secondaryPhases = [
+    { start: '2026-11-09', end: '2026-11-10', label: 'Planning', className: 'planning' }
+  ];
+  const holidays = [
+    { start: '2026-11-26', end: '2026-11-27', label: 'Thanksgiving', className: 'thanksgiving' }
+  ];
+
+  function dateKey(date) {
+    return date.toISOString().slice(0, 10);
+  }
+
+  function addEvent(date, label, className) {
+    const key = dateKey(date);
+    const dayEvents = events.get(key) || [];
+    const displayLabel = /release/i.test(label)
+      ? `${label} 10AM`
+      : /SNAP$/i.test(label) ? `${label} 4PM` : label;
+    dayEvents.push({ label: displayLabel, className });
+    events.set(key, dayEvents);
+  }
+
+  addEvent(new Date(year, 8, 16), 'V3 Stable Release', 'release');
+  addEvent(new Date(year, 8, 16), 'V11 Pre-release 1', 'prerelease');
+  addEvent(new Date(year, 8, 17), 'C#DK/C# SNAP', 'snapping');
+  addEvent(new Date(year, 9, 22), 'Code Freeze', 'freeze');
+  addEvent(new Date(year, 10, 11), 'V11 Stable Release', 'release');
+  addEvent(new Date(year, 11, 3), 'Code Freeze', 'freeze');
+  addEvent(new Date(year, 11, 16), 'Stable Release', 'release');
+
+  let prereleaseNumber = 2;
+  for (let date = new Date(year, 8, 18); date <= new Date(year, 11, 8); date.setDate(date.getDate() + 1)) {
+    if (date.getDay() === 0) addEvent(date, 'CTI Testing', 'cti');
+    if (date.getDay() === 3) {
+      const startsNewReleaseCycle = dateKey(date) === '2026-11-11';
+      if (startsNewReleaseCycle) prereleaseNumber = 1;
+      const prefix = startsNewReleaseCycle || date > new Date(year, 10, 11) ? '' : 'V11 ';
+      if (!['2026-10-28', '2026-11-04', '2026-11-25'].includes(dateKey(date))) {
+        addEvent(date, `${prefix}Pre-release ${prereleaseNumber++}`, 'prerelease');
       }
+    }
+    if (date.getDay() === 4 && !['2026-10-29', '2026-11-05', '2026-11-26'].includes(dateKey(date))) {
+      addEvent(date, 'C#DK/C# SNAP', 'snapping');
+    }
+    if (date.getDay() === 5) addEvent(date, 'CTI Testing', 'cti');
+  }
+
+  function phaseFor(date) {
+    const key = dateKey(date);
+    return phases.find(phase => key >= phase.start && key <= phase.end);
+  }
+
+  function holidayFor(date) {
+    const key = dateKey(date);
+    return holidays.find(holiday => key >= holiday.start && key <= holiday.end);
+  }
+
+  function secondaryPhaseFor(date) {
+    const key = dateKey(date);
+    return secondaryPhases.find(phase => key >= phase.start && key <= phase.end);
+  }
+
+  function renderPhase(date, phase) {
+    if (!phase || date.getDay() === 0 || date.getDay() === 6) return '';
+    const previousDate = new Date(date);
+    previousDate.setDate(date.getDate() - 1);
+    const nextDate = new Date(date);
+    nextDate.setDate(date.getDate() + 1);
+    const startsBand = dateKey(date) === phase.start || date.getDay() === 1 || phaseFor(previousDate) !== phase;
+    const endsBand = dateKey(date) === phase.end || date.getDay() === 5 || phaseFor(nextDate) !== phase;
+    const position = startsBand ? 'band-start' : endsBand ? 'band-end' : 'band-mid';
+    const label = startsBand ? phase.label : '';
+    return `<div class="band band-${phase.className} ${position}">${label}</div>`;
+  }
+
+  function renderHoliday(date, holiday) {
+    if (!holiday) return '';
+    const key = dateKey(date);
+    const position = key === holiday.start ? 'band-start' : 'band-end';
+    const label = key === holiday.start ? holiday.label : '';
+    return `<div class="band band-${holiday.className} ${position}">${label}</div>`;
+  }
+
+  function renderSecondaryPhase(date, phase) {
+    if (!phase || date.getDay() === 0 || date.getDay() === 6) return '';
+    const key = dateKey(date);
+    const position = key === phase.start ? 'band-start' : 'band-end';
+    const label = key === phase.start ? phase.label : '';
+    return `<div class="band band-${phase.className} band-secondary ${position}">${label}</div>`;
+  }
+
+  function renderMonth(monthIndex) {
+    const firstDay = new Date(year, monthIndex, 1);
+    const lastDay = new Date(year, monthIndex + 1, 0);
+    const gridStart = new Date(year, monthIndex, 1 - firstDay.getDay());
+    const gridEnd = new Date(year, monthIndex, lastDay.getDate() + (6 - lastDay.getDay()));
+    const monthName = firstDay.toLocaleString('en-US', { month: 'long' });
+    const cells = [];
+
+    for (let date = new Date(gridStart); date <= gridEnd; date.setDate(date.getDate() + 1)) {
+      const classes = ['cal-day'];
+      if (date.getMonth() !== monthIndex) classes.push('outside');
+      if (date.getDay() === 0 || date.getDay() === 6) classes.push('weekend');
+      const phase = phaseFor(date);
+      const secondaryPhase = secondaryPhaseFor(date);
+      const holiday = holidayFor(date);
+      const dayEvents = events.get(dateKey(date)) || [];
+      const tags = dayEvents.length
+        ? `<div class="tags"${holiday ? ' style="margin-top:60px"' : phase ? '' : ' style="margin-top:0"'}>${dayEvents.map(event => `<div class="tag tag-${event.className}">${event.label}</div>`).join('')}</div>`
+        : '';
+      cells.push(`<div class="${classes.join(' ')}"><div class="day-number">${date.getDate()}</div>${renderPhase(date, phase)}${renderSecondaryPhase(date, secondaryPhase)}${renderHoliday(date, holiday)}${tags}</div>`);
+    }
+
+    return `
+      <div class="month-section" id="${monthName.toLowerCase()}">
+        <div class="month-heading">${monthName} ${year}</div>
+        <div class="cal">
+          <div class="cal-header">
+            ${['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day, index) => `<div class="cal-header-cell${index === 0 || index === 6 ? ' weekend' : ''}">${day}</div>`).join('')}
+          </div>
+          <div class="cal-grid">${cells.join('')}</div>
+        </div>
+      </div>`;
+  }
+
+  document.querySelectorAll('.month-section').forEach(section => section.remove());
+  const script = document.currentScript;
+  script.insertAdjacentHTML('beforebegin', monthIndexes.map(renderMonth).join(''));
+  script.insertAdjacentHTML('beforebegin', `
+    <div class="legend">
+      <div class="legend-item"><span class="legend-swatch sw-release"></span>Release</div>
+      <div class="legend-item"><span class="legend-swatch sw-prerelease"></span>Pre-release</div>
+      <div class="legend-item"><span class="legend-swatch sw-snapping"></span>C#DK/C# SNAP</div>
+      <div class="legend-item"><span class="legend-swatch sw-cti"></span>CTI Testing</div>
+      <div class="legend-item"><span class="legend-swatch sw-planning"></span>Planning</div>
+      <div class="legend-item"><span class="legend-swatch sw-dev"></span>Dev</div>
+      <div class="legend-item"><span class="legend-swatch sw-endgame"></span>Endgame</div>
+      <div class="legend-item"><span class="legend-swatch sw-freeze"></span>Code Freeze</div>
+    </div>`);
+
+  const now = new Date();
+  if (now.getFullYear() === year && monthIndexes.includes(now.getMonth())) {
+    const currentSection = document.getElementById(now.toLocaleString('en-US', { month: 'long' }).toLowerCase());
+    currentSection.querySelectorAll('.cal-day:not(.outside)').forEach(cell => {
+      if (Number(cell.querySelector('.day-number').textContent) === now.getDate()) cell.classList.add('today');
     });
-  });
+  }
 })();
 </script>
 </body>
