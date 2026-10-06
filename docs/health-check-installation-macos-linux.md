@@ -5,7 +5,7 @@ C# Doctor checks the SDK and runtimes that C# Dev Kit needs. It can install requ
 ## Do this
 
 1. Run **C#: Check health with C# Doctor**.
-2. Review the proposed repair, then select **Install for C# Dev Kit** to consent.
+2. Review the proposed repair, then select **Install latest SDK** or its prerelease variant to consent.
 3. Let C# Doctor complete the managed installation, or follow the manual recovery guidance for your selected .NET host.
 4. Select **Recheck**. Use **Reload Window** if C# Doctor requests it.
 
@@ -15,7 +15,7 @@ C# Doctor uses a compatible .NET host selected by the CLI for the workspace. It 
 
 ## Understand dotnetup-managed repair
 
-For a new installation or a provider-default installation on macOS or Linux, **Install for C# Dev Kit** installs or migrates the matching SDK and runtime channels into dotnetup's canonical per-user root. Dotnetup owns its marked supported-shell profile block, the managed `dotnet` and `DOTNET_ROOT` values in that block, and its own `PATH` entry.
+For a new installation or a provider-default installation on macOS or Linux, **Install latest SDK** or its prerelease variant installs or migrates the matching SDK and runtime channels into dotnetup's canonical per-user root. Dotnetup owns its marked supported-shell profile block, the managed `dotnet` and `DOTNET_ROOT` values in that block, and its own `PATH` entry.
 
 C# Dev Kit uses the verified host immediately after repair. Existing terminals and other running applications keep their previous environment until you restart them. Fresh supported shells use the canonical dotnetup installation.
 
@@ -27,7 +27,7 @@ To reverse dotnetup's shell integration, run `dotnetup env clear`. This is the o
 
 **We require:** The SDK selected by the .NET CLI for the workspace must satisfy the workspace and tooling requirements, and its required .NET and ASP.NET Core runtimes must be available.
 
-**Fix it:** Select **Install for C# Dev Kit** when C# Doctor offers a dotnetup-managed repair; no administrator access is required for its per-user installation. Otherwise repair the user-controlled installation with its owning tool or correct the workspace's .NET selection.
+**Fix it:** Select **Install latest SDK** or its prerelease variant when C# Doctor offers a dotnetup-managed repair; no administrator access is required for its per-user installation. Otherwise repair the user-controlled installation with its owning tool or correct the workspace's .NET selection.
 
 **Verify:** Select **Recheck**, then run `dotnet --info` in a new terminal and confirm your shell selects the expected installation.
 

@@ -17,7 +17,7 @@ C# Doctor checks the .NET SDK used by C# Dev Kit and the runtimes needed by your
 
 ## Installation requires your consent
 
-Opening C# Doctor, refreshing results, restoring the workspace, and selecting **Recheck** do not install software. Installation begins only after you explicitly select **Install for C# Dev Kit** or another installation action. Windows system installation might also require elevation.
+Opening C# Doctor, refreshing results, restoring the workspace, and selecting **Recheck** do not install software. Installation begins only after you explicitly select **Install latest SDK**, its prerelease variant, or another installation action. Windows system installation might also require elevation.
 
 C# Dev Kit does not modify an installation selected through `dotnet.projectSdkPath` or another explicit user-controlled location. Explicit Visual Studio Code .NET path overrides and repository `global.json` policy remain authoritative.
 
