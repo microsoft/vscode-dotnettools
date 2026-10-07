@@ -66,6 +66,16 @@ To open C# Doctor, run **C#: Check health with C# Doctor** from the Command Pale
 
 A red **Failed** state blocks that requirement and may block a later stage. An amber **Needs attention** state means C# Dev Kit has usable project information, but part of the workspace is degraded. Missing required project runtimes block runtime readiness until all reported .NET and ASP.NET Core runtime bands are installed.
 
+## Understand results and recovery actions
+
+C# Doctor summarizes completed stages and keeps the next recovery action focused on the current issue. If a check is still waiting, the view indicates that it is waiting; if a VS Code reload is needed, it remains explicitly pending until you reload.
+
+For tooling requirements, C# Doctor distinguishes an SDK that is missing from one that is installed but outdated. It labels the suggested action **Install** or **Update** accordingly, based on the applicable .NET release track and workspace SDK requirements. Review **Technical details** for diagnostic information and details about the suggested recovery. When a repair needs to be done manually, follow the numbered instructions and links shown there.
+
+When project configuration fails, **Analyze with Copilot** is the primary diagnostic action when it is available and enabled. Analysis is optional, diagnostic-only, and non-mutating: it does not install software or repair the workspace. **Open output** and **Recheck workspace** remain secondary recovery actions for inspecting diagnostic output and retrying the checks.
+
+Recovery actions that install an SDK or reload VS Code require your confirmation; C# Doctor does not silently install or reload. Security advisories identify the distinct vulnerable packages and provide **Review Recommendations**. A healthy workspace may also show informational guidance about .NET 10 support; that guidance is not a failed requirement.
+
 ## Choose the guide for your task
 
 - [Why the current SDK matters](health-check-performance.md) — measured Aspire time-to-IntelliSense and memory results, Fast Build improvements, and concurrent-build coordination results.
