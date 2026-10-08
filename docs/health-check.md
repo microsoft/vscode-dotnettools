@@ -66,6 +66,14 @@ To open C# Doctor, run **C#: Check health with C# Doctor** from the Command Pale
 
 A red **Failed** state blocks that requirement and may block a later stage. An amber **Needs attention** state means C# Dev Kit has usable project information, but part of the workspace is degraded. Missing required project runtimes block runtime readiness until all reported .NET and ASP.NET Core runtime bands are installed.
 
+## Analyze configuration failures
+
+For supported configuration and requirements failures—such as SDK or runtime selection problems, missing runtimes, or a NuGet restore failure—**Analyze with Copilot** is the primary diagnostic action when available. It opens a new Ask-mode Copilot Chat with relevant health-check evidence, including the selected tooling host, SDK or runtime selections, explicit path overrides, and missing-runtime details. It also includes restore diagnostics when applicable and links to the C# Dev Kit log and, when available, the retained MSBuild binary log. The action stays first while temporarily unavailable; when analysis is unavailable, C# Doctor keeps its existing recovery choices.
+
+Analysis is optional and diagnostic-only. It does not edit files or settings, run commands, install or repair SDKs and runtimes, retry checks, or switch the selected host. Any recovery action—such as clearing a path override, installing a requirement, opening output, retrying verification, or rechecking the workspace—remains a separate, explicit choice.
+
+Changes to environment variables require a new VS Code process to take effect. On Windows, exit all VS Code windows, then start VS Code from the Start menu or File Explorer. On macOS or Linux, relaunch VS Code from a shell with the corrected environment. Reloading the window alone does not update the environment inherited by VS Code.
+
 ## Choose the guide for your task
 
 - [Why the current SDK matters](health-check-performance.md) — measured Aspire time-to-IntelliSense and memory results, Fast Build improvements, and concurrent-build coordination results.
