@@ -65,8 +65,11 @@ The health check derives runtime requirements from the evaluated target framewor
 1. Wait for the active restore, project detection, or installation step to finish.
 2. Select **Open output** and check whether the underlying command is still running or waiting for input.
 3. Select **Recheck** once.
-4. If an SDK or runtime was installed successfully but is still not detected, reload the VS Code window.
-5. If the same state remains, collect logs and report an issue.
+4. If the view appears stale for a reason other than a recent SDK or runtime installation, reload the VS Code window and select **Recheck**.
+5. If an SDK or runtime was installed successfully but is still not detected:
+   - On Windows, exit every VS Code window, then relaunch VS Code from the Start menu or File Explorer so the new process inherits the updated machine environment. **Reload Window** does not replace the environment of the long-lived VS Code application process. If the SDK or runtime is still not detected, restart Windows and select **Recheck**. See [Refresh a stale inherited `PATH`](health-check-installation-windows.md#refresh-a-stale-inherited-path).
+   - On macOS and Linux, use **Reload Window**, then select **Recheck**.
+6. If the same state remains, collect logs and report an issue.
 
 Avoid repeatedly selecting an installation action while an installation is already running.
 
