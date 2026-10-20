@@ -9,6 +9,8 @@ C# Doctor checks the SDK and runtimes that C# Dev Kit needs. It can install requ
 3. Let C# Doctor complete the managed installation, or follow the manual recovery guidance for your selected .NET host.
 4. Select **Recheck**. Use **Reload Window** if C# Doctor requests it.
 
+Before the first SDK or runtime installation needed in an extension session, C# Dev Kit updates its selected `dotnetup` CLI with `dotnetup self update --no-progress`. This updates the CLI itself, not the SDK or runtimes, and keeps the executable at its current location. C# Dev Kit checks `dotnetup self update --help` for the supported command before running it, so it does not confuse CLI self-update with `dotnetup update` for SDKs or runtimes. If the selected CLI is too old, C# Dev Kit refreshes it in the same directory using the official bootstrap and retries; if no CLI is present, it bootstraps one at the normal acquisition location and then self-updates. If refresh fails, C# Dev Kit reports diagnostics and uses only the available CLI; cancellation or an updater that does not finish aborts the installation.
+
 [Review the shared SDK, runtime, and consent rules](health-check-installation.md).
 
 C# Doctor uses a compatible .NET host selected by the CLI for the workspace. It modifies an installation only when it is authorized to manage that installation. If a package manager, version manager, explicit path, or other user-controlled installation selects `dotnet`, repair it with its owning tool, select a compatible installation, or clear an invalid explicit path override.
