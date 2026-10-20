@@ -59,7 +59,7 @@ To open C# Doctor, run **C#: Check health with C# Doctor** from the Command Pale
 
 | Stage | What C# Dev Kit checks |
 |---|---|
-| **Tooling Requirements** | A supported .NET SDK can be selected and is compatible with the workspace's `global.json`. |
+| **Tooling Requirements** | A compatible C# extension is available when required, and a supported .NET SDK can be selected and is compatible with the workspace's `global.json`. |
 | **Restore NuGet Packages** | NuGet restore completed sufficiently for project evaluation. |
 | **Detect Project Configuration** | C# Dev Kit evaluated the projects and identified their target frameworks. |
 | **Project Runtime Requirements** | The .NET and ASP.NET Core runtimes needed to run, debug, or test the evaluated projects are available. |
@@ -71,6 +71,8 @@ A red **Failed** state blocks that requirement and may block a later stage. An a
 C# Doctor summarizes completed stages and keeps the next recovery action focused on the current issue. If a check is still waiting, the view indicates that it is waiting; if a VS Code reload is needed, it remains explicitly pending until you reload.
 
 For tooling requirements, C# Doctor distinguishes an SDK that is missing from one that is installed but outdated. It labels the suggested action **Install** or **Update** accordingly, based on the applicable .NET release track and workspace SDK requirements. Review **Technical details** for diagnostic information and details about the suggested recovery. When a repair needs to be done manually, follow the numbered instructions and links shown there.
+
+An incompatible or missing C# extension is a separate tooling prerequisite from the .NET SDK. When C# Doctor reports this issue, it shows the installed C# extension version (or **Not installed**) and the required version separately from the SDK; the required version is displayed as “{version} or later.” For an installed but incompatible extension, choose **Upgrade C# extension** to install the latest release or pre-release from the configured channel; C# Doctor then reloads the VS Code window. If the extension is missing, choose **Install C# extension** to open its details in VS Code's Extensions view. If the details cannot be loaded, C# Doctor displays a warning and opens the extension's official Marketplace page in your browser instead. Select **Install** on the extension page and follow VS Code's installation and reload guidance. C# Doctor does not sign you in, install the missing extension, or reload the window automatically. In either case, this is a C# extension requirement, not a .NET SDK version requirement.
 
 When a safe, authorized runtime installation is the sole offered action, installation is primary and default, and **Analyze with Copilot** is not offered. In supported diagnostic states where analysis is offered—including runtime guidance without an authorized install action, SDK or runtime acquisition failures, root-configuration failures, project configuration failures, and after a failed installation—**Analyze with Copilot** is first and default. Available recovery actions, such as **Open output**, **Retry**, or **Recheck workspace**, remain separate, explicit secondary choices.
 
