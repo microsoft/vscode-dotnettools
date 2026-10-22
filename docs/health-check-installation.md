@@ -17,9 +17,11 @@ C# Doctor checks the .NET SDK used by C# Dev Kit and the runtimes needed by your
 
 ## Installation requires your consent
 
-Opening C# Doctor, refreshing results, restoring the workspace, and selecting **Recheck** do not install software. Installation begins only after you select an explicit installation action. Windows system installation might also require elevation.
+Opening C# Doctor, refreshing results, restoring the workspace, and selecting **Recheck** do not install software. Installation begins only after you select an explicit installation action. Windows system installation might also require elevation. An eligible Linux system SDK installation requires local graphical authorization through polkit.
 
 C# Dev Kit does not modify an installation selected through `dotnet.projectSdkPath` or another explicit user-controlled location.
+
+On Linux, C# Doctor never changes package repositories or `PATH`, runs or asks you to run `sudo`, or drives a terminal. It offers system SDK installation only for the narrowly supported package-manager cases described in the [macOS and Linux installation guide](health-check-installation-macos-linux.md#install-an-sdk-into-an-eligible-linux-system-host).
 
 <a id="install-a-missing-tooling-sdk"></a>
 <a id="resolve-a-globaljson-sdk-conflict"></a>
