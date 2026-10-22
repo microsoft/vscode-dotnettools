@@ -17,9 +17,11 @@ C# Doctor checks the .NET SDK used by C# Dev Kit and the runtimes needed by your
 
 ## Installation requires your consent
 
-Opening C# Doctor, refreshing results, restoring the workspace, and selecting **Recheck** do not install software. Installation begins only after you select an explicit installation action. Windows system installation might also require elevation.
+Opening C# Doctor, refreshing results, restoring the workspace, and selecting **Recheck** do not install software. Installation begins only after you explicitly select **Install latest SDK**, its prerelease variant, or another installation action. Windows system installation might also require elevation.
 
-C# Dev Kit does not modify an installation selected through `dotnet.projectSdkPath` or another explicit user-controlled location.
+C# Dev Kit does not modify an installation selected through `dotnet.projectSdkPath` or another explicit user-controlled location. Explicit Visual Studio Code .NET path overrides and repository `global.json` policy remain authoritative.
+
+On macOS and Linux, a new or provider-default repair can install or migrate the matching SDK and runtime channels into dotnetup's canonical per-user root. Existing qualifying installations in other persisted roots remain available to C# Dev Kit without implicit migration or shell-profile changes. Package managers, version managers, and their installation roots remain untouched. This behavior does not change C# Doctor installation on Windows.
 
 <a id="install-a-missing-tooling-sdk"></a>
 <a id="resolve-a-globaljson-sdk-conflict"></a>
