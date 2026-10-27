@@ -53,7 +53,15 @@ The SDK used to run the tooling is separate from the frameworks your projects ta
 
 The health check makes that dependency visible and recoverable. Instead of allowing an incompatible SDK, missing runtime, or failed project evaluation to cause unrelated features to fail later, it shows the exact stage that needs attention and provides one next action.
 
-To open C# Doctor, run **C#: Check health with C# Doctor** from the Command Palette in Visual Studio Code.
+## When C# Doctor starts
+
+C# Doctor stays unloaded until a non-untitled C# file (`.cs`) is visible in an editor. Core SDK selection, `global.json` observation, and runtime readiness continue in the background so builds can become ready without starting Doctor.
+
+Before that first C# editor appears, **C#: Check health with C# Doctor** and blocked **New Project** requests explain how to start Doctor; they do not queue a repair. Restored Doctor tabs show a lightweight placeholder and hydrate in the same tab after activation.
+
+When Doctor starts, it evaluates the current workspace evidence. If requirements are unmet, it opens once to show the problem; healthy workspaces remain silent. After activation, Doctor stays loaded even if the C# editor closes.
+
+To open C# Doctor after activation, run **C#: Check health with C# Doctor** from the Command Palette in Visual Studio Code.
 
 ## What the stages mean
 
