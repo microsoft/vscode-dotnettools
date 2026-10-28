@@ -59,7 +59,7 @@ To open C# Doctor, run **C#: Check health with C# Doctor** from the Command Pale
 
 | Stage | What C# Dev Kit checks |
 |---|---|
-| **Tooling Requirements** | A compatible C# extension is available when required, and a supported .NET SDK can be selected and is compatible with the workspace's `global.json`. |
+| **Tooling Requirements** | A compatible C# extension is available when required, a supported .NET SDK can be selected and is compatible with the workspace's `global.json`, and any required PATH/.NET root correction is complete. |
 | **Restore NuGet Packages** | NuGet restore completed sufficiently for project evaluation. |
 | **Detect Project Configuration** | C# Dev Kit evaluated the projects and identified their target frameworks. |
 | **Project Runtime Requirements** | The .NET and ASP.NET Core runtimes needed to run, debug, or test the evaluated projects are available. |
@@ -71,6 +71,23 @@ A red **Failed** state blocks that requirement and may block a later stage. An a
 C# Doctor summarizes completed stages and keeps the next recovery action focused on the current issue. If a check is still waiting, the view indicates that it is waiting; if a VS Code reload is needed, it remains explicitly pending until you reload.
 
 For tooling requirements, C# Doctor distinguishes an SDK that is missing from one that is installed but outdated. It labels the suggested action **Install** or **Update** accordingly, based on the applicable .NET release track and workspace SDK requirements. Review **Technical details** for diagnostic information and details about the suggested recovery. When a repair needs to be done manually, follow the numbered instructions and links shown there.
+
+### Resolve conflicting PATH and .NET root settings
+
+After explicit VS Code path settings and `DOTNET_HOST_PATH`, C# Dev Kit selects the first .NET executable on `PATH` before considering `DOTNET_ROOT`. If root variables point to a different installation, C# Doctor keeps the verified PATH-selected installation rather than switching to the conflicting root.
+
+When environment correction is required, **Tooling Requirements** shows **Action required**, even if the selected SDK itself is compatible. Later stages wait; C# Doctor does not report that tooling requirements are met while offering the required repair.
+
+Choose **Resolve**, review the selected installation, affected environment values, and persistence destinations, then confirm:
+
+- **Windows:** C# Doctor aligns user-scoped .NET root variables with the PATH-selected installation. It does not change the machine PATH.
+- **macOS and Linux:** C# Doctor updates supported Bash, Z shell, or Fish startup files to retain the selected executable on PATH and align the .NET root variables. It preserves unrelated profile content and PATH entries. Unsupported shells require manual correction.
+
+Resolve does not install an SDK or runtime, rewrite `global.json`, or override explicit VS Code path settings. Missing SDK or runtime components remain a separate recovery action.
+
+Saving the correction does not change the environment of running applications or existing terminals. Fully exit all VS Code windows and relaunch from a corrected environment, then choose **Recheck**. On macOS and Linux, start a fresh shell and launch VS Code from it. Tooling requirements remain unmet until the fresh environment is verified.
+
+### Other recovery actions
 
 An incompatible or missing C# extension is a separate tooling prerequisite from the .NET SDK. When C# Doctor reports this issue, it shows the installed C# extension version (or **Not installed**) and the required version separately from the SDK; the required version is displayed as “{version} or later.” For an installed but incompatible extension, choose **Upgrade C# extension** to install the latest release or pre-release from the configured channel; C# Doctor then reloads the VS Code window. If the extension is missing, choose **Install C# extension** to open its details in VS Code's Extensions view. If the details cannot be loaded, C# Doctor displays a warning and opens the extension's official Marketplace page in your browser instead. Select **Install** on the extension page and follow VS Code's installation and reload guidance. C# Doctor does not sign you in, install the missing extension, or reload the window automatically. In either case, this is a C# extension requirement, not a .NET SDK version requirement.
 
