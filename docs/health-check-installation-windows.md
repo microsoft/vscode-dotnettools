@@ -5,40 +5,44 @@ C# Doctor checks the SDK and runtimes that C# Dev Kit needs, then offers a recov
 ## Do this
 
 1. Run **C#: Check health with C# Doctor**.
-2. Select the installation or repair action shown for the blocked requirement.
+2. Select **Install** when the Windows system .NET installation is missing a required SDK or runtime.
 3. Approve elevation if Windows requests it.
-4. Select **Recheck**. Use **Reload Window** if C# Doctor requests it.
+4. Select **Recheck**. Use **Reload Window** only if C# Doctor requests it. Exit all Visual Studio Code windows only if C# Doctor still requests a full restart after reload.
 
 [Review the shared SDK, runtime, and consent rules](health-check-installation.md).
 
 ## Know which installation C# Doctor can update
 
-C# Doctor uses a compatible .NET host selected by the CLI for the workspace. It modifies an installation only when it is authorized to manage that installation.
+C# Doctor uses the Windows system .NET installation for ambient SDK discovery and repair. An explicit VS Code SDK path override remains a use-only selection and is never modified automatically.
 
 | What C# Doctor finds | What happens |
 |---|---|
-| C# Doctor can manage the selected installation | The offered repair installs the required components. A system-wide installation can require elevation and is eligible for .NET servicing through Microsoft Update when that servicing is enabled. |
-| A package manager, version manager, explicit path, or other user-controlled installation selects `dotnet` | C# Doctor reports the requirement without silently changing or bypassing that installation. Repair it with its owning tool, select a compatible installation, or clear an invalid explicit path override. |
+| The Windows system installation is missing a required SDK or runtime | C# Doctor offers **Install** for the system location. The operation can require elevation and the installation is eligible for .NET servicing through Microsoft Update when that servicing is enabled. |
+| `dotnet.projectSdkPath` selects a complete compatible SDK | C# Doctor uses that explicit installation without changing it. |
+| An explicit VS Code SDK or runtime path is unavailable, incompatible, or incomplete | C# Doctor offers **Clear .NET path overrides** after previewing the configured values. It does not repair or mutate the explicit installation. |
+| `PATH`, `DOTNET_HOST_PATH`, `DOTNET_ROOT`, a package manager, a version manager, or a user dotnetup root contains another SDK | C# Doctor does not recognize that ambient SDK as the Windows workspace SDK or repair owner. It evaluates the system installation instead. |
 
 Visual Studio acquires and services .NET through the Visual Studio Installer. Repairing .NET for C# Dev Kit does not replace Visual Studio servicing.
 
 ## Repair a missing tooling SDK or runtime
 
-**We require:** The SDK selected by the .NET CLI for the workspace must satisfy the workspace and tooling requirements, and its required .NET and ASP.NET Core runtimes must be available.
+**We require:** Unless an explicit `dotnet.projectSdkPath` selects a complete compatible SDK, the Windows system .NET installation must contain an SDK that satisfies the workspace and tooling requirements, plus the runtime needed to execute it.
 
-**Fix it:** Select the installation action shown in C# Doctor when it can manage the selected installation, and approve elevation if Windows requests it. Otherwise repair the user-controlled installation with its owning tool or correct the workspace's .NET selection.
+**Fix it:** Select the installation action shown in C# Doctor and approve elevation if Windows requests it. C# Doctor installs into the system .NET location rather than asking you to repair a custom ambient root.
 
-**Verify:** Select **Recheck**, then run `dotnet --info` in a new terminal if the result remains blocked.
+**Verify:** Select **Recheck**. If C# Doctor requests **Reload Window**, reload once so a fresh extension host can activate the verified system SDK.
 
 **Still blocked?** See [Tooling Requirements troubleshooting](health-check-troubleshooting.md#tooling-requirements).
 
-## Repair an incompatible `global.json`
+## Understand `global.json` on Windows
 
-**We require:** The `global.json` that governs the first workspace folder must allow the supported tooling SDK.
+**We require:** `sdk.version`, `rollForward`, and `allowPrerelease` must permit a supported SDK in the Windows system installation.
 
-**Fix it:** Use the proposed C# Doctor repair only if it matches the repository's SDK policy, or ask the repository owner to update `version`, `rollForward`, `allowPrerelease`, or `paths`.
+C# Doctor ignores `global.json` `sdk.paths` on Windows for SDK discovery, installation authorization, and acquisition identity. A custom `sdk.paths` entry does not redirect C# Doctor to a repository-local or user-controlled SDK root.
 
-**Verify:** Select **Recheck** and confirm the expected SDK under `dotnet --info` from the workspace folder.
+**Fix it:** Use a proposed C# Doctor repair only when the version, roll-forward, or prerelease policy is incompatible and the change matches the repository's SDK policy.
+
+**Verify:** Select **Recheck** and confirm that C# Doctor reports the expected system SDK or explicit VS Code SDK override.
 
 **Still blocked?** See [Tooling Requirements troubleshooting](health-check-troubleshooting.md#tooling-requirements).
 
@@ -52,12 +56,8 @@ Visual Studio acquires and services .NET through the Visual Studio Installer. Re
 
 **Still blocked?** See [Project Runtime Requirements troubleshooting](health-check-troubleshooting.md#project-runtime-requirements).
 
-## Refresh a stale inherited `PATH`
+## Apply a newly installed system SDK
 
-**We require:** VS Code must inherit the `PATH` that selects the intended .NET host.
+C# Doctor verifies the installed system SDK and retries activation before requesting a reload. If the running extension host cannot adopt it, select **Reload Window**.
 
-**Fix it:** **Exit Visual Studio Code**, close every VS Code window, and relaunch VS Code from Start or File Explorer. **Reload Window** and opening a new terminal are not enough to replace the environment inherited by the existing VS Code process.
-
-**Verify:** Run `dotnet --info` in a new VS Code terminal, then select **Recheck**.
-
-**Still blocked?** See [stale-result troubleshooting](health-check-troubleshooting.md#if-the-view-appears-stuck-or-stale).
+After reload, C# Doctor verifies the fixed system host directly rather than relying on the inherited `PATH`. Exit all Visual Studio Code windows and relaunch only if C# Doctor reports that the verified system SDK is still unavailable. Do not restart merely to activate a custom or user dotnetup root.
